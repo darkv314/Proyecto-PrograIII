@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AppP3</string>
+    <string name="songName_songArtist">Song name and Artist</string>
 </resources>
