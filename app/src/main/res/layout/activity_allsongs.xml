@@ -19,21 +19,25 @@
         android:layout_marginStart="5dp"
         android:layout_weight="60"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/songNameView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Can't stop"/>
+            tools:text="Can't stop" />
+
         <TextView
             android:id="@+id/songArtistView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
             android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="15sp"
             android:textStyle="normal"
-            tools:text="Red Hot Chilli Peppers"/>
+            tools:text="Red Hot Chilli Peppers" />
     </LinearLayout>
 </LinearLayout>
 

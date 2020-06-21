@@ -1,21 +1,7 @@
 package com.example.appp3;
 
-import android.annotation.SuppressLint;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import androidx.biometric.BiometricPrompt;
-import androidx.biometric.BiometricManager;
-import androidx.core.content.ContextCompat;
-
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +9,12 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
@@ -148,7 +140,7 @@ public class PlayerActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 enterVaultCont++;
-                if(enterVaultCont==3)
+                if(enterVaultCont==3)//////////////////
                 {
                     enterVaultCont = 0;
                     biometricPrompt.authenticate(promptInfo);

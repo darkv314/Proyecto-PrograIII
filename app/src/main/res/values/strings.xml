@@ -2,13 +2,15 @@
     <string name="app_name">AppP3</string>
     <string name="song_Name">Snow(Hey Oh)</string>
     <string name="song_Artist">Red Hot Chilli Peppers</string>
-    <string name="edit">Editar</string>
-    <string name="format">Formato</string>
-    <string name="list_rep">Listas de reproducción</string>
-    <string name="sound">Sonido</string>
-    <string name="exit">Salir</string>
-    <string name="theme">Tema</string>
+    <string name="edit">Edit</string>
+    <string name="format">Format</string>
+    <string name="list_rep">Playlists</string>
+    <string name="sound">Sound</string>
+    <string name="exit">Log Out</string>
+    <string name="theme">Theme</string>
     <string name="enterPassword">Enter the password</string>
     <string name="enterValue">Enter</string>
     <string name="emptyError">The value is required</string>
+    <string name="clickTimes">Introduce how many times you wish to tap the musical note</string>
+    <string name="backupPassword">Set a backup password</string>
 </resources>

@@ -11,6 +11,6 @@
     <string name="enterPassword">Introduzca la contraseña</string>
     <string name="enterValue">Ingresar</string>
     <string name="emptyError">Se necesita llenar el campo</string>
-
-
+    <string name="clickTimes">Introduzca cuantas veces desea hacer click en la nota musical</string>
+    <string name="backupPassword">Escoge una contraseña de respaldo</string>
 </resources>
