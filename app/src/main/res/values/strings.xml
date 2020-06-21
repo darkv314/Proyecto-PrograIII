@@ -2,4 +2,12 @@
     <string name="app_name">AppP3</string>
     <string name="song_Name">Snow(Hey Oh)</string>
     <string name="song_Artist">Red Hot Chilli Peppers</string>
+    <string name="edit">Editar</string>
+    <string name="format">Formato</string>
+    <string name="list_rep">Listas de reproducción</string>
+    <string name="sound">Sonido</string>
+    <string name="exit">Salir</string>
+    <string name="theme">Tema</string>
+
+
 </resources>

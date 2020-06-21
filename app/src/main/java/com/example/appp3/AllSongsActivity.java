@@ -1,6 +1,8 @@
 package com.example.appp3;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toolbar;
 
 import com.example.appp3.adapter.TaskAdapter;
 import com.example.appp3.utils.Constants;
@@ -27,7 +30,9 @@ public class AllSongsActivity extends AppCompatActivity {
     private Button addButton;
     private TaskAdapter adapter;
     private ListView taskListView;
-
+    private Toolbar toolbar; // Usaremos un toolbar personalizado, para agregar el icono del Drawer a la izquierda
+    private ActionBarDrawerToggle drawerToggle; // El objeto del botón del drawer
+    private DrawerLayout drawerLayout; // Nuestro DrawerLayout
 
 
 
