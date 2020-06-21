@@ -8,10 +8,9 @@
     <string name="sound">Sonido</string>
     <string name="exit">Salir</string>
     <string name="theme">Tema</string>
-    <string name="enterPassword">Enter the password</string>
-    <string name="enterValue">Enter</string>
-    <string name="emptyError">The value is required</string>
-
+    <string name="enterPassword">Introduzca la contraseña</string>
+    <string name="enterValue">Ingresar</string>
+    <string name="emptyError">Se necesita llenar el campo</string>
 
 
 </resources>

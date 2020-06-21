@@ -9,5 +9,5 @@
     <color name="colorGrey">#91918d</color>
     <color name="colorCian">#c4f0f8</color>
     <color name="colorDarkBlue">#3c3f6c</color>
-
+    <color name="semi_transparent">#4D000000</color>
 </resources>

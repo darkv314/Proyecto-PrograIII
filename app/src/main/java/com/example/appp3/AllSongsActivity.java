@@ -7,7 +7,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +18,7 @@ import com.example.appp3.adapter.TaskAdapter;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
+import java.util.ConcurrentModificationException;
 import  java.util.List;
 import java.util.ArrayList;
 
@@ -108,8 +108,10 @@ public class AllSongsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 AllSongsTask task = items.get(position);
-                items.clear();
-                fillAllSongsTasks();
+                Intent musicPlayer = new Intent(AllSongsActivity.this, PlayerActivity.class);
+                String songName = new Gson().toJson(items.get(position));
+                musicPlayer.putExtra(Constants.INTENT_SONG_NAME, songName);
+                startActivity(musicPlayer);
                 adapter.notifyDataSetChanged();
             }
         });
