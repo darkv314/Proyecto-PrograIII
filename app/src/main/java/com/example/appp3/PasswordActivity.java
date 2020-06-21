@@ -10,6 +10,8 @@ public class PasswordActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.enter_with_pass_popup);
+        setContentView(R.layout.activity_main);
+        //TODO
+        //NO SE ALGO
     }
 }

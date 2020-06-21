@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class PlayerActivity extends AppCompatActivity
     private BiometricManager biometricManager;
     private BiometricPrompt.PromptInfo promptInfo;
     private Context context=this;
+    private RelativeLayout popupRelativeLayout;
     private AllSongsTask song;
     private int enterVaultCont = 0;
 
@@ -64,6 +66,8 @@ public class PlayerActivity extends AppCompatActivity
 
     private void initViews()
     {
+        popupRelativeLayout = findViewById(R.id.popUp);
+        popupRelativeLayout.setVisibility(View.INVISIBLE);
         songArtist = findViewById(R.id.song_artist);
         songName = findViewById(R.id.song_name);
         songName.setText(song.getSong_name());
@@ -95,8 +99,7 @@ public class PlayerActivity extends AppCompatActivity
                 super.onAuthenticationError(errorCode, errString);
                 if(errString.equals("Use account password"))
                 {
-                    Intent popUp = new Intent(PlayerActivity.this, PasswordActivity.class);
-                    startActivity(popUp);
+                    popupRelativeLayout.setVisibility(View.VISIBLE);
                 }
                 else
                 {
@@ -133,6 +136,13 @@ public class PlayerActivity extends AppCompatActivity
     }
     private void addEvents()
     {
+        popupRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupRelativeLayout.setVisibility(View.INVISIBLE);
+            }
+        });
+
         enterVault.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -143,8 +153,6 @@ public class PlayerActivity extends AppCompatActivity
                     enterVaultCont = 0;
                     biometricPrompt.authenticate(promptInfo);
                 }
-//                Log.e(LOG,""+enterVaultCont);
-//                Toast.makeText(PlayerActivity.this,"Entraste "+enterVaultCont+" veces", Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -11,7 +11,4 @@
     <string name="enterPassword">Enter the password</string>
     <string name="enterValue">Enter</string>
     <string name="emptyError">The value is required</string>
-
-
-
 </resources>
