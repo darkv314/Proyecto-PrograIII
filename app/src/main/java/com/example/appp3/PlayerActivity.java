@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import com.example.appp3.model.User;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
@@ -24,17 +27,20 @@ import java.util.concurrent.Executor;
 public class PlayerActivity extends AppCompatActivity
 {
     public static String LOG = AllSongsActivity.class.getName();
+    private int numberOfTimes;
+    private EditText passText;
     private ImageButton enterVault;
     private TextView songName;
     private TextView songArtist;
     private Executor executor;
+    private Button loginButton;
     private BiometricPrompt biometricPrompt;
     private BiometricManager biometricManager;
     private BiometricPrompt.PromptInfo promptInfo;
-    private Context context=this;
     private RelativeLayout popupRelativeLayout;
     private AllSongsTask song;
     private int enterVaultCont = 0;
+    SqliteHelper sqliteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,8 +64,11 @@ public class PlayerActivity extends AppCompatActivity
 
     private void initViews()
     {
+        sqliteHelper = new SqliteHelper(this);
         popupRelativeLayout = findViewById(R.id.popUp);
         popupRelativeLayout.setVisibility(View.INVISIBLE);
+        passText = findViewById(R.id.passwordText);
+        loginButton = findViewById(R.id.loginButton);
         songArtist = findViewById(R.id.song_artist);
         songName = findViewById(R.id.song_name);
         songName.setText(song.getSong_name());
@@ -128,10 +137,17 @@ public class PlayerActivity extends AppCompatActivity
     }
     private void addEvents()
     {
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validate();
+            }
+        });
         popupRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popupRelativeLayout.setVisibility(View.INVISIBLE);
+
             }
         });
 
@@ -140,13 +156,40 @@ public class PlayerActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 enterVaultCont++;
-                if(enterVaultCont==3)//////////////////
+                if(enterVaultCont==3)
                 {
                     enterVaultCont = 0;
                     biometricPrompt.authenticate(promptInfo);
                 }
             }
         });
+    }
+
+    public void validate()
+    {
+        String password = passText.getText().toString().trim();
+
+        //Handling validation for Password field
+        if (password.isEmpty())
+        {
+            passText.setError("Please enter valid password!");
+            return;
+        }
+        else if(password.length() < 4)
+        {
+            passText.setError(getString(R.string.passTooShort));
+            return;
+        }
+        User user = sqliteHelper.Authenticate(new User(null, null, password));
+        if(user!=null)
+        {
+            Toast.makeText(PlayerActivity.this,getString(R.string.logged),Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(PlayerActivity.this,getString(R.string.loginFail),Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override

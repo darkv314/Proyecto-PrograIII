@@ -13,4 +13,10 @@
     <string name="emptyError">Se necesita llenar el campo</string>
     <string name="clickTimes">Introduzca cuantas veces desea hacer click en la nota musical</string>
     <string name="backupPassword">Escoge una contraseña de respaldo</string>
+    <string name="Done">Listo</string>
+    <string name="passTooShort">La contraseña es muy corta!  Debe contener almenos 4 caracteres</string>
+    <string name="numberNotAccepted">El número no puede ser 0!</string>
+    <string name="registerSuccess">Usuario creado con exito!  Disfruta ;)</string>
+    <string name="logged">Ingresaste corectamente uwu</string>
+    <string name="loginFail">Contraseña incorrecta :(</string>
 </resources>

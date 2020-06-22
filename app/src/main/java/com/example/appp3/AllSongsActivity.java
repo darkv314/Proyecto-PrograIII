@@ -12,9 +12,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.appp3.adapter.TaskAdapter;
+import com.example.appp3.model.User;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 public class AllSongsActivity extends AppCompatActivity {
 
     public static String LOG = AllSongsActivity.class.getName();
+    private User user;
     private Context context;
     private List<AllSongsTask> items = new ArrayList<>();
     private Button addButton;
@@ -42,7 +45,7 @@ public class AllSongsActivity extends AppCompatActivity {
         context=this;
         setContentView(R.layout.activity_menu);
         Log.d(LOG, "onCreate");
-       // receiveValues();
+        //receiveValues();
         initViews();
         addEvents();
         fillAllSongsTasks();
@@ -50,13 +53,6 @@ public class AllSongsActivity extends AppCompatActivity {
         fillAllSongsTasks();
         fillAllSongsTasks();
     }
- //   private void receiveValues(){
-   //     Intent intent =getIntent();
-     //   if(intent.hasExtra(Constants.INTENT_KEY_USER)){
-       //     String userObj= intent.getStringExtra(Constants.INTENT_KEY_USER);
-         //   User user = new Gson().fromJson(userObj, User.class);
-        //}
-    //}
 
     @Override
     protected void onStart() {
@@ -117,8 +113,16 @@ public class AllSongsActivity extends AppCompatActivity {
         });
     }
 
-
-
+    private void receiveValues()
+    {
+        Toast.makeText(AllSongsActivity.this, getString(R.string.registerSuccess),Toast.LENGTH_SHORT);
+        Intent intent = getIntent();
+        if (intent.hasExtra(Constants.REGISTER_SUCCESS))
+        {
+            String userString = intent.getStringExtra(Constants.REGISTER_SUCCESS);
+            user = new Gson().fromJson(userString, User.class);
+        }
+    }
 
     private void fillAllSongsTasks() {
         items.add(new AllSongsTask(items.size(), "Can't Stop",

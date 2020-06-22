@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
     android:paddingLeft="40dp"
-    android:paddingRight="40dp"
-    android:background="@color/colorPrimary">
+    android:paddingRight="40dp">
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="30dp"
-        app:srcCompat="@drawable/ic_log_click"/>
+        app:srcCompat="@drawable/ic_log_click" />
 
     <TextView
         android:layout_width="match_parent"
@@ -21,16 +24,19 @@
 
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp" />
+
     <EditText
+        android:id="@+id/numberOfTimes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:inputType="number"/>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="30dp"
-        app:srcCompat="@drawable/ic_log_password"/>
+        app:srcCompat="@drawable/ic_log_password" />
 
     <TextView
         android:layout_width="match_parent"
@@ -38,9 +44,20 @@
         android:text="@string/backupPassword"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp" />
+
     <EditText
+        android:id="@+id/passwordText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/doneButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/Done" />
 
 
 </LinearLayout>
