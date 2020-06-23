@@ -20,6 +20,11 @@
     <string name="logged">Correctly logged in uwu</string>
     <string name="loginFail">Invalid password :(</string>
     <string name="change">Change</string>
+    <string name="files">Files</string>
+    <string name="images">Images</string>
+    <string name="newFile">New File</string>
+    <string name="addFile">Add File</string>
+    <string name="add">Add</string>
     <string name="open">open</string>
     <string name="close">close</string>
 </resources>

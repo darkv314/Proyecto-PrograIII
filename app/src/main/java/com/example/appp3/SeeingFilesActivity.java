@@ -72,7 +72,7 @@ public class SeeingFilesActivity extends AppCompatActivity
         buttonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         addButton = new Button(context);
         addButton.setId(FOOTER_ID);
-        addButton.setText("Add");
+        addButton.setText(R.string.add);
         addButton.setLayoutParams(buttonLayoutParams);
         addButton.setBackgroundResource(R.color.colorAccent);
         addButton.setTextColor(getResources().getColor(android.R.color.white));

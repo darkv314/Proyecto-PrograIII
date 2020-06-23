@@ -23,25 +23,25 @@ public class FirstTimeRegister extends AppCompatActivity
 
 
 
-    String firstRegister = "firstRegister";
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences sharedpreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-        if (!sharedpreferences.getBoolean(firstRegister, false)) {
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putBoolean(firstRegister, Boolean.TRUE);
-            editor.apply();
-        } else {
-            Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
-            startActivity(allSongs);
-        }
-    }
-    @Override
-    protected void onPause(){
-        super.onPause();
-        finish();
-    }
+//    String firstRegister = "firstRegister";
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        SharedPreferences sharedpreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+//        if (!sharedpreferences.getBoolean(firstRegister, false)) {
+//            SharedPreferences.Editor editor = sharedpreferences.edit();
+//            editor.putBoolean(firstRegister, Boolean.TRUE);
+//            editor.apply();
+//        } else {
+//            Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
+//            startActivity(allSongs);
+//        }
+//    }
+//    @Override
+//    protected void onPause(){
+//        super.onPause();
+//        finish();
+//    }
 
 
     @Override

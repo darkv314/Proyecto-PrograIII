@@ -20,6 +20,11 @@
     <string name="logged">Ingresaste corectamente uwu</string>
     <string name="loginFail">Contraseña incorrecta :(</string>
     <string name="change">Cambiar</string>
+    <string name="files">Archivos</string>
+    <string name="images">Imagenes</string>
+    <string name="newFile">Archivo Nuevo</string>
+    <string name="addFile">Añadir Archivo</string>
+    <string name="add">Añadir</string>
     <string name="open">abrir</string>
     <string name="close">cerrar</string>
 </resources>

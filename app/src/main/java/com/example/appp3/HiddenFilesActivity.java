@@ -52,7 +52,7 @@ public class HiddenFilesActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                items.add(new FileModel(items.size(), "Archivo Nuevo",R.drawable.ic_player_playslist_play));
+                items.add(new FileModel(items.size(), R.string.newFile,R.drawable.ic_player_playslist_play));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -66,8 +66,8 @@ public class HiddenFilesActivity extends AppCompatActivity {
     }
 
     private void fillQuarantineTasks() {
-        items.add(new FileModel(items.size(), "Archivos",R.drawable.ic_player_playslist_play));
-        items.add(new FileModel(items.size(), "Imagenes",R.drawable.ic_player_playslist_play));
+        items.add(new FileModel(items.size(), R.string.files,R.drawable.ic_player_playslist_play));
+        items.add(new FileModel(items.size(), R.string.images,R.drawable.ic_player_playslist_play));
     }
 }
 

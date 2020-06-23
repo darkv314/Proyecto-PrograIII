@@ -2,11 +2,11 @@ package com.example.appp3.model;
 
 public class FileModel {
     private long id;
-    private String name;
+    private int name;
     private boolean finished;
     private int image;
 
-    public FileModel(long id, String name, int image) {
+    public FileModel(long id, int name, int image) {
         this.id = id;
         this.name = name;
         this.finished = false;
@@ -21,11 +21,11 @@ public class FileModel {
         this.id = id;
     }
 
-    public String getName() {
+    public int getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(int name) {
         this.name = name;
     }
 
