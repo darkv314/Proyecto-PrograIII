@@ -5,13 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HiddenFilesActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:id="@+id/settingsImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/ic_menu_black_24dp" />
+    </FrameLayout>
 
     <ListView
         android:id="@+id/fileList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_above="@+id/addbutton"
+        android:layout_marginTop="60dp">
 
-    </ListView>\
+    </ListView>
 
     <Button
         android:id="@+id/addbutton"

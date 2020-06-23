@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.appp3.adapter.FilesAdapter;
@@ -26,7 +27,7 @@ public class HiddenFilesActivity extends AppCompatActivity {
     private Context context;
     private List<FileModel> items = new ArrayList<>();
     private List<FilesV> fileItems = new ArrayList<>();
-
+    private ImageView settingView;
     private ListView fileListView;
     private ListFilesAdapter adapter;
     private Button addButton;
@@ -37,11 +38,13 @@ public class HiddenFilesActivity extends AppCompatActivity {
         context = this;
 
         setContentView(R.layout.activity_hidden_files);
+        getSupportActionBar().hide();
         initViews();
         addEvents();
         fillQuarantineTasks();
     }
     private void initViews() {
+        settingView = findViewById(R.id.settingsImageView);
         fileListView = findViewById(R.id.fileList);
         adapter = new ListFilesAdapter(context, items);
         fileListView.setAdapter(adapter);
@@ -61,6 +64,13 @@ public class HiddenFilesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent fistrMenu = new Intent(HiddenFilesActivity.this, SeeingFilesActivity.class);
                 startActivity(fistrMenu);
+            }
+        });
+        settingView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change = new Intent(HiddenFilesActivity.this, Settings2Activity.class);
+                startActivity(change);
             }
         });
     }

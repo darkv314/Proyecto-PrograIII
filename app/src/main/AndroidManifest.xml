@@ -18,8 +18,6 @@
 
         <activity android:name=".FirstTimeRegister"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-
-
             >
             <intent-filter>
 
@@ -29,23 +27,17 @@
         </activity>
         <activity android:name=".AllSongsActivity"/>
         <activity android:name=".RecyclerViewActivity"/>
-        <activity android:name=".PlayerActivity"
-            android:parentActivityName=".AllSongsActivity">
+        <activity android:name=".PlayerActivity">
         </activity>
-        <activity android:name=".PasswordActivity"
-            android:parentActivityName=".PlayerActivity"/>
+        <activity android:name=".PasswordActivity"/>
         <activity android:name=".FistrMenu"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
-        <activity android:name=".HiddenFilesActivity"
-            android:parentActivityName=".PlayerActivity"/>
-        <activity android:name=".SeeingFilesActivity"
-            android:parentActivityName=".HiddenFilesActivity"/>
-        <activity android:name=".Settings1Activity"
-            android:parentActivityName=".HiddenFilesActivity"/>
-        <activity android:name=".Settings2Activity"
-            android:parentActivityName=".HiddenFilesActivity"/>
+        <activity android:name=".HiddenFilesActivity" />
+        <activity android:name=".SeeingFilesActivity"/>
+        <activity android:name=".Settings1Activity"/>
+        <activity android:name=".Settings2Activity"/>
         <service android:name=".PlayerActivity"/>
 
         <meta-data
