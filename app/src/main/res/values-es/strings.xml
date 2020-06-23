@@ -19,4 +19,7 @@
     <string name="registerSuccess">Usuario creado con exito!  Disfruta ;)</string>
     <string name="logged">Ingresaste corectamente uwu</string>
     <string name="loginFail">Contraseña incorrecta :(</string>
+    <string name="change">Cambiar</string>
+    <string name="open">abrir</string>
+    <string name="close">cerrar</string>
 </resources>

@@ -30,6 +30,12 @@
         </activity>
         <activity android:name=".PasswordActivity"
             android:parentActivityName=".PlayerActivity"/>
+        <activity android:name=".FistrMenu"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+        <activity android:name=".HiddenFilesActivity" />
+        <activity android:name=".SeeingFilesActivity" />
         <service android:name=".PlayerActivity"/>
 
         <meta-data

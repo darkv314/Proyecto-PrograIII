@@ -140,7 +140,10 @@ public class PlayerActivity extends AppCompatActivity
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate();
+                if(validate()){
+                    Intent change = new Intent(PlayerActivity.this, HiddenFilesActivity.class);
+                    startActivity(change);
+                }
             }
         });
         popupRelativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +168,7 @@ public class PlayerActivity extends AppCompatActivity
         });
     }
 
-    public void validate()
+    public boolean validate()
     {
         String password = passText.getText().toString().trim();
 
@@ -173,21 +176,23 @@ public class PlayerActivity extends AppCompatActivity
         if (password.isEmpty())
         {
             passText.setError("Please enter valid password!");
-            return;
+            return false;
         }
         else if(password.length() < 4)
         {
             passText.setError(getString(R.string.passTooShort));
-            return;
+            return false;
         }
         User user = sqliteHelper.Authenticate(new User(null, null, password));
         if(user!=null)
         {
             Toast.makeText(PlayerActivity.this,getString(R.string.logged),Toast.LENGTH_SHORT).show();
+            return true;
         }
         else
         {
             Toast.makeText(PlayerActivity.this,getString(R.string.loginFail),Toast.LENGTH_SHORT).show();
+            return false;
         }
 
     }

@@ -19,4 +19,7 @@
     <string name="registerSuccess">User creater successfully! Enjoy ;)</string>
     <string name="logged">Correctly logged in uwu</string>
     <string name="loginFail">Invalid password :(</string>
+    <string name="change">Change</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>

@@ -31,6 +31,7 @@ public class AllSongsActivity extends AppCompatActivity {
     private Context context;
     private List<AllSongsTask> items = new ArrayList<>();
     private Button addButton;
+    private Button change;
     private TaskAdapter adapter;
     private ListView taskListView;
     private Toolbar toolbar; // Usaremos un toolbar personalizado, para agregar el icono del Drawer a la izquierda
@@ -95,6 +96,7 @@ public class AllSongsActivity extends AppCompatActivity {
         taskListView = findViewById(R.id.taskListView);
         adapter = new TaskAdapter(context, items);
         taskListView.setAdapter(adapter);
+        change = findViewById(R.id.songMatriz);
     }
 
 
@@ -109,6 +111,13 @@ public class AllSongsActivity extends AppCompatActivity {
                 musicPlayer.putExtra(Constants.INTENT_SONG_NAME, songName);
                 startActivity(musicPlayer);
                 adapter.notifyDataSetChanged();
+            }
+        });
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent fistrMenu = new Intent(AllSongsActivity.this, FistrMenu.class);
+                startActivity(fistrMenu);
             }
         });
     }
