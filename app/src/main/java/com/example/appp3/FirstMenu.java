@@ -1,10 +1,8 @@
 package com.example.appp3;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,26 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.appp3.utils.Constants;
 import com.google.android.material.navigation.NavigationView;
 
 import com.example.appp3.adapter.SongRecyclerViewAdapter;
 import com.example.appp3.adapter.SongViewHolder;
 import com.example.appp3.callback.SongClickCallBack;
 import com.example.appp3.model.SongItem;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FistrMenu extends AppCompatActivity{
+public class FirstMenu extends AppCompatActivity{
 
     private Context context;
     private List<SongItem> items = new ArrayList<>();
@@ -99,7 +94,7 @@ public class FistrMenu extends AppCompatActivity{
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent settings = new Intent(FistrMenu.this, Settings1Activity.class);
+                Intent settings = new Intent(FirstMenu.this, Settings1Activity.class);
                 startActivity(settings);
             }
         });
@@ -115,7 +110,7 @@ public class FistrMenu extends AppCompatActivity{
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent change = new Intent(FistrMenu.this, AllSongsActivity.class);
+                Intent change = new Intent(FirstMenu.this, AllSongsActivity.class);
                 startActivity(change);
             }
         });

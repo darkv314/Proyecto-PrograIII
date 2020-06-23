@@ -17,7 +17,7 @@
       android:pathData="M16.2216,22.4443h-3.1114v-9.3341h18.6681v-4.667l6.2227,6.2227l-6.2227,6.2227v-4.667h-15.5568zM31.7784,25.5557h3.1114v9.3341h-18.6681v4.667l-6.2227,-6.2227l6.2227,-6.2227v4.667h15.5568z"
       android:strokeLineJoin="miter"
       android:strokeWidth="0"
-      android:fillColor="#000000"
+      android:fillColor="#d1dae7"
       android:fillType="nonZero"
       android:strokeLineCap="butt"/>
 </vector>

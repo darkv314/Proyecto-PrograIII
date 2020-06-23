@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppP3</string>
+    <string name="app_name">HiSky</string>
     <string name="song_Name">Snow(Hey Oh)</string>
     <string name="song_Artist">Red Hot Chilli Peppers</string>
     <string name="edit">Editar</string>
@@ -19,7 +19,7 @@
     <string name="registerSuccess">Usuario creado con exito!  Disfruta ;)</string>
     <string name="logged">Ingresaste corectamente uwu</string>
     <string name="loginFail">Contraseña incorrecta :(</string>
-    <string name="change">Cambiar</string>
+    <string name="change">VISTA</string>
     <string name="files">Archivos</string>
     <string name="images">Imagenes</string>
     <string name="newFile">Archivo Nuevo</string>
@@ -27,5 +27,7 @@
     <string name="add">Añadir</string>
     <string name="open">abrir</string>
     <string name="close">cerrar</string>
-    <string name="settings">Ajustes</string>
+    <string name="settings">AJUSTES</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="welcomeMessage">Como primer paso a tu experiencia HiSky porfavor llena los siguinetes campos.</string>
 </resources>

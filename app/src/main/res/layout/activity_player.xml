@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/mountain_music_rep"
         android:orientation="vertical"
         android:padding="30dp">
 
@@ -18,7 +18,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/colorPrimary"
+            android:background="@null"
             app:srcCompat="@drawable/ic_player_music_note" />
 
         <ImageView
@@ -174,7 +174,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/passwordText"
                 android:layout_centerInParent="true"
-                android:text="@string/enterPassword">
+                android:text="@string/enterPassword"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold">
 
             </TextView>
 
@@ -184,8 +186,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/enterPass"
                 android:layout_centerInParent="true"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:text="@string/enterValue">
+                style="@style/Theme.App.Base"
+                android:text="@string/enterValue"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold">
 
             </Button>
 

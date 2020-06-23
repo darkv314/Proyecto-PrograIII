@@ -3,9 +3,23 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryDark</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/navigate</item>
+        <item name="colorPrimaryDark">@color/navigate2</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppThemeW" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/navigate</item>
+        <item name="colorPrimaryDark">@color/navigate2</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Theme.App.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/colorGrey</item>
+        <item name="colorControlActivated">@color/colorGrey</item>
+        <item name="colorControlHighlight">@color/colorGrey</item>
     </style>
 
 </resources>

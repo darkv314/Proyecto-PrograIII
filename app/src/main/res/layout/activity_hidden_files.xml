@@ -7,9 +7,9 @@
     tools:context=".HiddenFilesActivity">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorPrimary"
-        android:paddingStart="15dp">
+        android:layout_height="55dp"
+        android:background="@color/navigate"
+        android:paddingStart="12dp">
 
         <ImageView
             android:id="@+id/settingsImageView"
@@ -33,5 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text= "@string/addFile" />
+        android:text= "@string/addFile"
+        android:textColor="@color/colorWhite"/>
 </RelativeLayout>

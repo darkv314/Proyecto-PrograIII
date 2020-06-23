@@ -2,12 +2,15 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#91918d</color>
     <color name="colorBackground">#E9E9E9</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorGrey">#91918d</color>
+    <color name="colorGrey">#d1dae7</color>
     <color name="colorCian">#c4f0f8</color>
     <color name="colorDarkBlue">#3c3f6c</color>
     <color name="semi_transparent">#4D000000</color>
+    <color name="navigate">#422047</color>
+    <color name="navigate2">#301837</color>
+
 </resources>

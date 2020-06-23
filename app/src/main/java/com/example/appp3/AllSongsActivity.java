@@ -123,7 +123,7 @@ public class AllSongsActivity extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent fistrMenu = new Intent(AllSongsActivity.this, FistrMenu.class);
+                Intent fistrMenu = new Intent(AllSongsActivity.this, FirstMenu.class);
                 startActivity(fistrMenu);
             }
         });

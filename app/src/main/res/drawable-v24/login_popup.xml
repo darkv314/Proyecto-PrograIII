@@ -14,5 +14,5 @@
 
     <stroke
         android:width="2dp"
-        android:color="@color/colorPrimaryDark" />
+        android:color="@color/colorAccent" />
 </shape>
