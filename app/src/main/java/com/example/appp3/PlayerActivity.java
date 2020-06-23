@@ -117,6 +117,8 @@ public class PlayerActivity extends AppCompatActivity
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(),
                         "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                Intent change = new Intent(PlayerActivity.this, HiddenFilesActivity.class);
+                startActivity(change);
             }
 
             @Override
