@@ -145,6 +145,8 @@ public class PlayerActivity extends AppCompatActivity
             public void onClick(View v) {
                 if(validate()){
                     Intent change = new Intent(PlayerActivity.this, HiddenFilesActivity.class);
+                    passText.setText("");
+                    popupRelativeLayout.setVisibility(View.INVISIBLE);
                     startActivity(change);
                 }
             }
