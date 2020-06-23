@@ -38,8 +38,14 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
-        <activity android:name=".HiddenFilesActivity" />
-        <activity android:name=".SeeingFilesActivity" />
+        <activity android:name=".HiddenFilesActivity"
+            android:parentActivityName=".PlayerActivity"/>
+        <activity android:name=".SeeingFilesActivity"
+            android:parentActivityName=".HiddenFilesActivity"/>
+        <activity android:name=".Settings1Activity"
+            android:parentActivityName=".HiddenFilesActivity"/>
+        <activity android:name=".Settings2Activity"
+            android:parentActivityName=".HiddenFilesActivity"/>
         <service android:name=".PlayerActivity"/>
 
         <meta-data

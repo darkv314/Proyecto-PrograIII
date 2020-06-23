@@ -20,6 +20,8 @@
             android:text="@string/change">
         </Button>
         <Button
+            android:id="@+id/settings1"
+            android:text="@string/settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </Button>

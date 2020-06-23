@@ -44,6 +44,7 @@ public class FistrMenu extends AppCompatActivity{
     private TextView song_name;
     private TextView song_artist;
     private Button change;
+    private Button settings;
     private LinearLayout barra;
 
     private RecyclerView songRecyclerView;
@@ -68,6 +69,7 @@ public class FistrMenu extends AppCompatActivity{
 
     }
     private void initViews() {
+        settings = findViewById(R.id.settings1);
         change = findViewById(R.id.listSongs);
         barra = findViewById(R.id.barraReproductor);
         song_artist = findViewById(R.id.song_artist);
@@ -94,6 +96,13 @@ public class FistrMenu extends AppCompatActivity{
 
     }
     private void addEvents() {
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settings = new Intent(FistrMenu.this, Settings1Activity.class);
+                startActivity(settings);
+            }
+        });
         adapter.setCallback(new SongClickCallBack() {
             @Override
             public void onSongClick(SongItem song) {

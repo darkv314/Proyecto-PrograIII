@@ -20,7 +20,6 @@ import com.example.appp3.model.User;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
-import java.util.ConcurrentModificationException;
 import  java.util.List;
 import java.util.ArrayList;
 
@@ -32,6 +31,7 @@ public class AllSongsActivity extends AppCompatActivity {
     private List<AllSongsTask> items = new ArrayList<>();
     private Button addButton;
     private Button change;
+    private Button settings;
     private TaskAdapter adapter;
     private ListView taskListView;
     private Toolbar toolbar; // Usaremos un toolbar personalizado, para agregar el icono del Drawer a la izquierda
@@ -97,11 +97,18 @@ public class AllSongsActivity extends AppCompatActivity {
         adapter = new TaskAdapter(context, items);
         taskListView.setAdapter(adapter);
         change = findViewById(R.id.songMatriz);
+        settings = findViewById(R.id.settings);
     }
 
 
     private void addEvents() {
-
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settings = new Intent(AllSongsActivity.this, Settings1Activity.class);
+                startActivity(settings);
+            }
+        });
         taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
