@@ -19,6 +19,7 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 import com.example.appp3.model.User;
+import com.example.appp3.repository.UserRepository;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
@@ -161,7 +162,7 @@ public class PlayerActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 enterVaultCont++;
-                if(enterVaultCont==3)
+                if(UserRepository.getInstance().login(enterVaultCont))
                 {
                     enterVaultCont = 0;
                     biometricPrompt.authenticate(promptInfo);

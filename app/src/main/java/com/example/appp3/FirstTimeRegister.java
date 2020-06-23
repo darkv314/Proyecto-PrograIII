@@ -11,6 +11,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appp3.model.User;
+import com.example.appp3.repository.UserRepository;
 
 public class FirstTimeRegister extends AppCompatActivity
 {
@@ -94,7 +95,9 @@ public class FirstTimeRegister extends AppCompatActivity
             setNumberOfTimes.setError(getString(R.string.numberNotAccepted));
             return;
         }
+
         User user = new User(null, nOfTimes, pass);
+        UserRepository.getInstance().register(user);
         sqliteHelper.addUser(user);
         Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
         startActivity(allSongs);
