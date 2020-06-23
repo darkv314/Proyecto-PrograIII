@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@null"
     android:orientation="horizontal"
     android:padding="10dp">
 
@@ -26,25 +26,32 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="70"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/fileName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="File1.txt"/>
+            android:text="File1.txt"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"/>
 
         <TextView
             android:id="@+id/fileSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="8MB"/>
+            android:text="8MB"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"/>
 
         <TextView
             android:id="@+id/creationDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="18/06/2020"/>
+            android:text="18/06/2020"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"/>
 
     </LinearLayout>
 

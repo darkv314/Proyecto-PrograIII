@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +16,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.android.material.navigation.NavigationView;
-
 import com.example.appp3.adapter.SongRecyclerViewAdapter;
 import com.example.appp3.adapter.SongViewHolder;
 import com.example.appp3.callback.SongClickCallBack;
@@ -41,7 +38,6 @@ public class FirstMenu extends AppCompatActivity{
     private Button change;
     private Button settings;
     private LinearLayout barra;
-
     private RecyclerView songRecyclerView;
     private SongRecyclerViewAdapter adapter;
     private SongViewHolder SongViewHolder;
@@ -49,7 +45,6 @@ public class FirstMenu extends AppCompatActivity{
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar toolbar;
     private NavigationView navigationView;
-
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
@@ -80,14 +75,10 @@ public class FirstMenu extends AppCompatActivity{
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer);
-
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
-
-
-
 
     }
     private void addEvents() {
@@ -125,6 +116,34 @@ public class FirstMenu extends AppCompatActivity{
                 "System Of A Dawn","T"));
         items.add(new SongItem(items.size(), "High Hopes ",
                 "Panic! At The Disco","H"));
+        items.add(new SongItem(items.size(), "Inner City",
+                "Goldie","I"));
+        items.add(new SongItem(items.size(), "Bittersweet Symphony",
+                "The Verve","B"));
+        items.add(new SongItem(items.size(), "Killing in the Name",
+                "Rage Against The Machine","K"));
+        items.add(new SongItem(items.size(), "Sure Shot",
+                "Beastie Boys","S"));
+        items.add(new SongItem(items.size(), "Nothing Compare 2 U'",
+                "Sinnnead O'Connor","N"));
+        items.add(new SongItem(items.size(), "Born Slippy.Nuxx",
+                "Underworld","B"));
+        items.add(new SongItem(items.size(), "Loser",
+                "Beck","T"));
+        items.add(new SongItem(items.size(), "Deceptacon",
+                "La Tigre","D"));
+        items.add(new SongItem(items.size(), "Paranoid Android",
+                "Radiohead","P"));
+        items.add(new SongItem(items.size(), "Doo Wop(That Thing)",
+                "Lauryn Hill","D"));
+        items.add(new SongItem(items.size(), "Enter Sandman",
+                "Metallica","E"));
+        items.add(new SongItem(items.size(), "Connection",
+                "Elastica","C"));
+        items.add(new SongItem(items.size(), "Juicy",
+                "The Notorious Big","J"));
+        items.add(new SongItem(items.size(), "Poison",
+                "The Prodigy","P"));
     }
 }
 

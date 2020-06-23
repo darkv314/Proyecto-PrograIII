@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 import com.example.appp3.adapter.FilesAdapter;
 import com.example.appp3.adapter.ListFilesAdapter;
 import com.example.appp3.model.FileModel;
@@ -18,7 +17,6 @@ import com.example.appp3.model.FilesV;
 import com.example.appp3.SeeingFilesActivity;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 

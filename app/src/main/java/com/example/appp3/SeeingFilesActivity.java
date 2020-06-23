@@ -45,10 +45,17 @@ public class SeeingFilesActivity extends AppCompatActivity
 
     private void fillFilesV()
     {
-        items.add(new FilesV(items.size(), "File1.txt", "7MB", "17/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File1.txt", "7MB", "16/06/2020", R.drawable.ic_collections_black_24dp));
         items.add(new FilesV(items.size(), "File2.txt", "8MB", "18/06/2020", R.drawable.ic_collections_black_24dp));
         items.add(new FilesV(items.size(), "File3.txt", "9MB", "19/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File4.txt", "10MB", "20/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File5.txt", "10MB", "20/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File6.txt", "5MB", "21/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File7.txt", "11MB", "21/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File8.txt", "17MB", "22/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File9.txt", "11MB", "23/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File10.txt", "10MB", "23/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File11.txt", "12MB", "24/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File12.txt", "20MB", "24/06/2020", R.drawable.ic_collections_black_24dp));
 
     }
 
