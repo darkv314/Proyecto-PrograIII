@@ -30,4 +30,27 @@
     <string name="settings">SETTINGS</string>
     <string name="welcome">Welcome</string>
     <string name="welcomeMessage">As a first step to your HiSky experience please fill out the following fields.</string>
+    <string name="settings_head">Settings</string>
+    <string name="default_gallery_storage">Default</string>
+    <string name="key_gallery_name">Name</string>
+    <string name="title_gallery_storage">Title</string>
+    <string name="key_upload_over_wifi">Key over WIFI</string>
+    <string name="summary_upload_over_wifi">Summary Upload WiFi</string>
+    <string name="title_auto_upload">Auto Upload</string>
+    <string name="url_faq">url</string>
+    <string name="title_version">title ver</string>
+    <string name="app_version">ver</string>
+    <string name="pref_header_about">pref header</string>
+    <string name="title_vibrate">title vibrate</string>
+    <string name="summary_vibrate">summary vibrate</string>
+    <string name="key_vibrate">key vibrate</string>
+    <string name="title_upload_quality">a</string>
+    <string name="key_upload_quality">key</string>
+    <string name="summary_upload_video_quality">videoquality</string>
+    <string name="pref_title_notifications">notification</string>
+    <string name="notifications_new_message">message</string>
+    <string name="title_new_notification_sound">sound</string>
+    <string name="key_notifications_new_message_ringtone">sound key</string>
+    <string name="summary_choose_ringtone">rington</string>
+    <string name="pref_title_ringtone">title ringtone</string>
 </resources>
