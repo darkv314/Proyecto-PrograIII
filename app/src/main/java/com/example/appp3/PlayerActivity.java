@@ -1,6 +1,5 @@
 package com.example.appp3;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -40,7 +39,7 @@ public class PlayerActivity extends AppCompatActivity {
     private AllSongsTask song;
     private User user;
     private int enterVaultCont = 0;
-    SqliteHelper sqliteHelper;
+    UserSQLiteHelper userSQLiteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        sqliteHelper = new SqliteHelper(PlayerActivity.this);
+        userSQLiteHelper = new UserSQLiteHelper(PlayerActivity.this);
         setUser();
         popupRelativeLayout = findViewById(R.id.popUp);
         popupRelativeLayout.setVisibility(View.INVISIBLE);
@@ -132,7 +131,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     void setUser() {
-        Cursor cursor = sqliteHelper.readUser();
+        Cursor cursor = userSQLiteHelper.readUser();
         if (cursor.getCount() == -1) {
             Log.e(LOG, "This is working)?");
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();

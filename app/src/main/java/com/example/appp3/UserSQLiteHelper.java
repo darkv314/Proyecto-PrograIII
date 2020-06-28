@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.example.appp3.model.User;
 
-public class SqliteHelper extends SQLiteOpenHelper {
+public class UserSQLiteHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "usersVault.db";
     private static final int DATABASE_VERSION = 1;
@@ -21,7 +21,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PASSWORD = "user_password";
     private static final String COLUMN_NOFTIMES = "user_noftimes";
 
-    public SqliteHelper(@Nullable Context context) {
+    public UserSQLiteHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }

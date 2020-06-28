@@ -15,7 +15,7 @@ public class FirstTimeRegister extends AppCompatActivity
     private EditText setPassword;
     private EditText setNumberOfTimes;
     private Button doneButton;
-    SqliteHelper sqliteHelper;
+    UserSQLiteHelper userSQLiteHelper;
 
     String firstRegister = "firstRegister";
     @Override
@@ -51,7 +51,7 @@ public class FirstTimeRegister extends AppCompatActivity
         setPassword = findViewById(R.id.passwordText);
         setNumberOfTimes = findViewById(R.id.numberOfTimes);
         doneButton = findViewById(R.id.doneButton);
-        sqliteHelper = new SqliteHelper(this);
+        userSQLiteHelper = new UserSQLiteHelper(this);
     }
 
     private void addEvents()
@@ -88,7 +88,7 @@ public class FirstTimeRegister extends AppCompatActivity
             setNumberOfTimes.setError(getString(R.string.numberNotAccepted));
             return;
         }
-        sqliteHelper.addUser(pass, Integer.parseInt(nOfTimes));
+        userSQLiteHelper.addUser(pass, Integer.parseInt(nOfTimes));
         Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
         startActivity(allSongs);
     }
