@@ -2,6 +2,7 @@ package com.example.appp3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,16 +20,13 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 import com.example.appp3.model.User;
-import com.example.appp3.repository.UserRepository;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
 import java.util.concurrent.Executor;
 
-public class PlayerActivity extends AppCompatActivity
-{
+public class PlayerActivity extends AppCompatActivity {
     public static String LOG = AllSongsActivity.class.getName();
-    private int numberOfTimes;
     private EditText passText;
     private ImageButton enterVault;
     private TextView songName;
@@ -40,12 +38,12 @@ public class PlayerActivity extends AppCompatActivity
     private BiometricPrompt.PromptInfo promptInfo;
     private RelativeLayout popupRelativeLayout;
     private AllSongsTask song;
+    private User user;
     private int enterVaultCont = 0;
     SqliteHelper sqliteHelper;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
         receiveValues();
@@ -53,19 +51,17 @@ public class PlayerActivity extends AppCompatActivity
         addEvents();
     }
 
-    private void receiveValues()
-    {
+    private void receiveValues() {
         Intent intent = getIntent();
-        if (intent.hasExtra(Constants.INTENT_SONG_NAME))
-        {
+        if (intent.hasExtra(Constants.INTENT_SONG_NAME)) {
             String songName = intent.getStringExtra(Constants.INTENT_SONG_NAME);
             song = new Gson().fromJson(songName, AllSongsTask.class);
         }
     }
 
-    private void initViews()
-    {
-        sqliteHelper = new SqliteHelper(this);
+    private void initViews() {
+        sqliteHelper = new SqliteHelper(PlayerActivity.this);
+        setUser();
         popupRelativeLayout = findViewById(R.id.popUp);
         popupRelativeLayout.setVisibility(View.INVISIBLE);
         passText = findViewById(R.id.passwordText);
@@ -76,8 +72,7 @@ public class PlayerActivity extends AppCompatActivity
         songArtist.setText(song.getSong_artist());
         enterVault = findViewById(R.id.music_note);
         biometricManager = BiometricManager.from(this);
-        switch (biometricManager.canAuthenticate())
-        {
+        switch (biometricManager.canAuthenticate()) {
             case BiometricManager.BIOMETRIC_SUCCESS:
                 Log.d("MY_APP_TAG", "App can authenticate using biometrics.");
                 break;
@@ -99,13 +94,10 @@ public class PlayerActivity extends AppCompatActivity
             public void onAuthenticationError(int errorCode,
                                               @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
-                if(errString.equals("Use account password"))
-                {
+                if (errString.equals("Use account password")) {
                     popupRelativeLayout.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    Log.d("MY_APP_TAG",""+errString);
+                } else {
+                    Log.d("MY_APP_TAG", "" + errString);
                     Toast.makeText(getApplicationContext(),
                             "Authentication error: " + errString, Toast.LENGTH_SHORT)
                             .show();
@@ -117,7 +109,7 @@ public class PlayerActivity extends AppCompatActivity
                     @NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(),
-                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                        getString(R.string.logged), Toast.LENGTH_SHORT).show();
                 Intent change = new Intent(PlayerActivity.this, HiddenFilesActivity.class);
                 startActivity(change);
             }
@@ -138,12 +130,25 @@ public class PlayerActivity extends AppCompatActivity
                 .build();
 
     }
-    private void addEvents()
-    {
+
+    void setUser() {
+        Cursor cursor = sqliteHelper.readUser();
+        if (cursor.getCount() == -1) {
+            Log.e(LOG, "This is working)?");
+            Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
+        } else {
+            Log.e(LOG, "This is not working)?");
+            while (cursor.moveToNext()) {
+                user = new User(cursor.getString(0),cursor.getString(1), Integer.parseInt(cursor.getString(2)));
+            }
+        }
+    }
+
+    private void addEvents() {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate()){
+                if (validate()) {
                     Intent change = new Intent(PlayerActivity.this, HiddenFilesActivity.class);
                     passText.setText("");
                     popupRelativeLayout.setVisibility(View.INVISIBLE);
@@ -161,11 +166,9 @@ public class PlayerActivity extends AppCompatActivity
 
         enterVault.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 enterVaultCont++;
-                if(UserRepository.getInstance().login(enterVaultCont))
-                {
+                if (enterVaultCont == user.getNumber_of_times()) {
                     enterVaultCont = 0;
                     biometricPrompt.authenticate(promptInfo);
                 }
@@ -173,30 +176,22 @@ public class PlayerActivity extends AppCompatActivity
         });
     }
 
-    public boolean validate()
-    {
+    public boolean validate() {
         String password = passText.getText().toString().trim();
 
         //Handling validation for Password field
-        if (password.isEmpty())
-        {
+        if (password.isEmpty()) {
             passText.setError("Please enter valid password!");
             return false;
-        }
-        else if(password.length() < 4)
-        {
+        } else if (password.length() < 4) {
             passText.setError(getString(R.string.passTooShort));
             return false;
         }
-        User user = sqliteHelper.Authenticate(new User(null, null, password));
-        if(user!=null)
-        {
-            Toast.makeText(PlayerActivity.this,getString(R.string.logged),Toast.LENGTH_SHORT).show();
+        if (user.getPassword().equals(password)) {
+            Toast.makeText(PlayerActivity.this, getString(R.string.logged), Toast.LENGTH_SHORT).show();
             return true;
-        }
-        else
-        {
-            Toast.makeText(PlayerActivity.this,getString(R.string.loginFail),Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(PlayerActivity.this, getString(R.string.loginFail), Toast.LENGTH_SHORT).show();
             return false;
         }
 

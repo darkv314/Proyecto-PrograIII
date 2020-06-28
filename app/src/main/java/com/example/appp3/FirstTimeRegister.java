@@ -10,39 +10,32 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.appp3.model.User;
-import com.example.appp3.repository.UserRepository;
-
 public class FirstTimeRegister extends AppCompatActivity
 {
     private EditText setPassword;
     private EditText setNumberOfTimes;
     private Button doneButton;
-
     SqliteHelper sqliteHelper;
 
-
-
-//    String firstRegister = "firstRegister";
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        SharedPreferences sharedpreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-//        if (!sharedpreferences.getBoolean(firstRegister, false)) {
-//            SharedPreferences.Editor editor = sharedpreferences.edit();
-//            editor.putBoolean(firstRegister, Boolean.TRUE);
-//            editor.apply();
-//        } else {
-//            Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
-//            startActivity(allSongs);
-//        }
-//    }
-//    @Override
-//    protected void onPause(){
-//        super.onPause();
-//        finish();
-//    }
-
+    String firstRegister = "firstRegister";
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedpreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        if (!sharedpreferences.getBoolean(firstRegister, false)) {
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putBoolean(firstRegister, Boolean.TRUE);
+            editor.apply();
+        } else {
+            Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
+            startActivity(allSongs);
+        }
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -95,10 +88,7 @@ public class FirstTimeRegister extends AppCompatActivity
             setNumberOfTimes.setError(getString(R.string.numberNotAccepted));
             return;
         }
-
-        User user = new User(null, nOfTimes, pass);
-        UserRepository.getInstance().register(user);
-        sqliteHelper.addUser(user);
+        sqliteHelper.addUser(pass, Integer.parseInt(nOfTimes));
         Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
         startActivity(allSongs);
     }
