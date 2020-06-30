@@ -45,19 +45,30 @@ public class  UserRepository {
     }
 
     public void setUserLogged(User userLogged) {
+
         String userLoggedString = new Gson().toJson(userLogged);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("user",userLoggedString);
         editor.putLong("timestamp", Calendar.getInstance().getTime().getTime());
         editor.apply();
+
     }
     public User getUserLogged(){
+
         if(preferences.contains("user")){
+
             String userLoggedString = preferences.getString("user", null);
+
             if(userLoggedString != null){
-                long timestamp = preferences.getLong("timestamp", 0);
-                Date date = new Date(timestamp);
-                Log.e("Ultimo acceso", date.toLocaleString());
+                if(preferences.contains("timestamp")){
+
+                    long timestamp = preferences.getLong("timestamp", 0);
+                    Date date = new Date(timestamp);
+                    Log.e("Ultimo acceso", date.toLocaleString());
+                }
+
+                User userLogged = new Gson().fromJson(userLoggedString, User.class);
+                return userLogged;
             }
         }
         return null;
