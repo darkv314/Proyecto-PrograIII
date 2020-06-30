@@ -31,4 +31,8 @@
     <string name="welcome">Bienvenido</string>
     <string name="welcomeMessage">Como primer paso a tu experiencia HiSky porfavor llena los siguinetes campos.</string>
     <string name="deleteButton">Eliminar archivo</string>
+    <string name="nameFile">Nombre del Archivo</string>
+    <string name="pathFile">Ruta</string>
+    <string name="send">Crear</string>
+    <string name="clean">Limpiar</string>
 </resources>

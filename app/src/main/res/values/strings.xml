@@ -30,5 +30,9 @@
     <string name="settings">SETTINGS</string>
     <string name="welcome">Welcome</string>
     <string name="welcomeMessage">As a first step to your HiSky experience please fill out the following fields.</string>
+    <string name="nameFile">Name of File</string>
+    <string name="pathFile">Path</string>
+    <string name="send">Create</string>
+    <string name="clean">Clean</string>
     <string name="deleteButton">Delete file</string>
 </resources>

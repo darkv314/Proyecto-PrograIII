@@ -1,6 +1,7 @@
 package com.example.appp3;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,11 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appp3.adapter.FilesAdapter;
 import com.example.appp3.model.FilesV;
+import com.example.appp3.utils.Constants;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,25 +41,17 @@ public class SeeingFilesActivity extends AppCompatActivity
         //initViews();
         fillFilesV();
         fillFilesV();
-        fillFilesV();
-        fillFilesV();
-        fillFilesV();
+        receiveValues();
+
         addEvents();
     }
 
     private void fillFilesV()
     {
-        items.add(new FilesV(items.size(), "File1.txt", "7MB", "16/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File2.txt", "8MB", "18/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File3.txt", "9MB", "19/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File5.txt", "10MB", "20/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File6.txt", "5MB", "21/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File7.txt", "11MB", "21/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File8.txt", "17MB", "22/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File9.txt", "11MB", "23/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File10.txt", "10MB", "23/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File11.txt", "12MB", "24/06/2020", R.drawable.ic_collections_black_24dp));
-        items.add(new FilesV(items.size(), "File12.txt", "20MB", "24/06/2020", R.drawable.ic_collections_black_24dp));
+        items.add(new FilesV(items.size(), "File1.txt", "7MB", "17/06/2020", R.drawable.ic_collections_black_24dp, "/storage/extSdCard"));
+        items.add(new FilesV(items.size(), "File2.txt", "8MB", "18/06/2020", R.drawable.ic_collections_black_24dp, "/storage/extSdCard"));
+        items.add(new FilesV(items.size(), "File3.txt", "9MB", "19/06/2020", R.drawable.ic_collections_black_24dp, "/storage/extSdCard"));
+        items.add(new FilesV(items.size(), "File4.txt", "10MB", "20/06/2020", R.drawable.ic_collections_black_24dp, "/storage/extSdCard"));
 
     }
 
@@ -94,11 +90,18 @@ public class SeeingFilesActivity extends AppCompatActivity
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                items.add(new FilesV(items.size(), "File " + items.size(),
-                        "20MB", "23/06/2020", R.drawable.ic_collections_black_24dp));
-                adapter.notifyDataSetChanged();
-                listView.smoothScrollToPosition(items.size());
+                Intent creation = new Intent(SeeingFilesActivity.this, CreationFile.class);
+                startActivity(creation);
             }
         });
+    }
+    private void receiveValues() {
+        Intent intent = getIntent();
+        if (intent.hasExtra(Constants.INTENT_FILE_CREATION)) {
+            String fileObj = intent.getStringExtra(Constants.INTENT_FILE_CREATION);
+            FilesV file = new Gson().fromJson(fileObj, FilesV.class);
+            items.add(file);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

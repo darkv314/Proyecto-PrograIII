@@ -6,13 +6,15 @@ public class FilesV {
     private String size;
     private String creation;
     private int image;
+    private String path;
 
-    public FilesV(long id, String name, String size, String creation, int image) {
+    public FilesV(long id, String name, String size, String creation, int image, String path) {
         this.id = id;
         this.name = name;
         this.size = size;
         this.creation = creation;
         this.image = image;
+        this.path = path;
     }
 
     public long getId() {
@@ -53,5 +55,12 @@ public class FilesV {
 
     public void setImage(int image) {
         this.image = image;
+    }
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

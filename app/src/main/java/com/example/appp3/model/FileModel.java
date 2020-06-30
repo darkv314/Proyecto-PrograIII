@@ -2,15 +2,17 @@ package com.example.appp3.model;
 
 public class FileModel {
     private long id;
-    private int name;
+    private String name;
     private boolean finished;
     private int image;
+    private  String path;
 
-    public FileModel(long id, int name, int image) {
+    public FileModel(long id, String name, int image, String path) {
         this.id = id;
         this.name = name;
         this.finished = false;
         this.image = image;
+        this.path = path;
     }
 
     public long getId() {
@@ -21,11 +23,11 @@ public class FileModel {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -45,5 +47,12 @@ public class FileModel {
         this.image = image;
     }
 
-}
+    public String getPath() {
+        return path;
+    }
 
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+}
