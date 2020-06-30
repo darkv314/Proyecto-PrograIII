@@ -30,10 +30,19 @@
         <activity android:name=".PlayerActivity"
             android:theme="@style/AppThemeW">
         </activity>
+        <activity android:name=".PayPalActivity"
+            android:theme="@style/AppThemeW">
+        </activity>
+        <activity android:name=".PaymentDetails"
+            android:theme="@style/AppThemeW">
+        </activity>
         <activity android:name=".PasswordActivity"/>
         <activity android:name=".FirstMenu"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+        </activity>
+        <activity android:name=".AboutUsActivity"
+            android:theme="@style/AppThemeW">
         </activity>
         <activity android:name=".HiddenFilesActivity"/>
         <activity android:name=".SeeingFilesActivity"/>

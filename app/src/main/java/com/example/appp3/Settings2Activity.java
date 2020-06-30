@@ -10,4 +10,6 @@ public class Settings2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_layout2);
     }
+
+
 }

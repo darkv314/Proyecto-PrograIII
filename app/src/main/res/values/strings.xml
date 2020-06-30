@@ -31,26 +31,26 @@
     <string name="welcome">Welcome</string>
     <string name="welcomeMessage">As a first step to your HiSky experience please fill out the following fields.</string>
     <string name="settings_head">Settings</string>
-    <string name="default_gallery_storage">Default</string>
-    <string name="key_gallery_name">Name</string>
-    <string name="title_gallery_storage">Title</string>
-    <string name="key_upload_over_wifi">Key over WIFI</string>
-    <string name="summary_upload_over_wifi">Summary Upload WiFi</string>
-    <string name="title_auto_upload">Auto Upload</string>
-    <string name="url_faq">url</string>
-    <string name="title_version">title ver</string>
-    <string name="app_version">ver</string>
-    <string name="pref_header_about">pref header</string>
-    <string name="title_vibrate">title vibrate</string>
-    <string name="summary_vibrate">summary vibrate</string>
-    <string name="key_vibrate">key vibrate</string>
-    <string name="title_upload_quality">a</string>
-    <string name="key_upload_quality">key</string>
-    <string name="summary_upload_video_quality">videoquality</string>
-    <string name="pref_title_notifications">notification</string>
-    <string name="notifications_new_message">message</string>
-    <string name="title_new_notification_sound">sound</string>
-    <string name="key_notifications_new_message_ringtone">sound key</string>
-    <string name="summary_choose_ringtone">rington</string>
-    <string name="pref_title_ringtone">title ringtone</string>
+    <string name="app_name_full">HiSky</string>
+    <string name="authors">Authors</string>
+    <string name="info">Info</string>
+    <string name="ver">Version</string>
+    <string name="dunno">SpiceGirls</string>
+    <string name="support">Support</string>
+    <string name="telegram">Telegram</string>
+    <string name="wapp">Whats App</string>
+    <string name="donate">  Donate</string>
+    <string name="donate_subtext">Hey everyone! It took a lot of hard work to turn this project into reality, and I hope you\'re enjoying it! If you like the project and want it to continue, please consider donating. It motivates me to keep working on it.
+
+
+You can donate via %1$s
+or via the UPI address %2$s</string>
+    <string name="about_also">If you have any problem don\'t hesitate to CONTACT US. And if you liked this app please help us and DONATE.</string>
+    <string name="darkv314">Ricardo Tejerina</string>
+    <string name="mik43la">Mikaela Cárdenas</string>
+    <string name="laBalaElmo">Juan Rodrigo Tordoya</string>
+    <string name="aleS900">Santiago Vargas</string>
+    <string name="deseg_gd">Graphics Designer ;)</string>
+    <string name="abou_us">About Us</string>
+
 </resources>

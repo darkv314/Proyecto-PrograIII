@@ -43,6 +43,7 @@ public class SeeingFilesActivity extends AppCompatActivity
         addEvents();
     }
 
+
     private void fillFilesV()
     {
         items.add(new FilesV(items.size(), "File1.txt", "7MB", "16/06/2020", R.drawable.ic_collections_black_24dp));
