@@ -39,11 +39,10 @@ public class AllSongsActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout; // Nuestro DrawerLayout
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context=this;
+        context = this;
         setContentView(R.layout.activity_menu);
         Log.d(LOG, "onCreate");
         //receiveValues();
@@ -92,7 +91,7 @@ public class AllSongsActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-       // addButton = findViewById(R.id.addButton);
+        // addButton = findViewById(R.id.addButton);
         taskListView = findViewById(R.id.taskListView);
         adapter = new TaskAdapter(context, items);
         taskListView.setAdapter(adapter);
@@ -109,13 +108,16 @@ public class AllSongsActivity extends AppCompatActivity {
                 startActivity(settings);
             }
         });
+
         taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 AllSongsTask task = items.get(position);
                 Intent musicPlayer = new Intent(AllSongsActivity.this, PlayerActivity.class);
                 String songName = new Gson().toJson(items.get(position));
+
                 musicPlayer.putExtra(Constants.INTENT_SONG_NAME, songName);
+
                 startActivity(musicPlayer);
                 adapter.notifyDataSetChanged();
             }
@@ -129,12 +131,10 @@ public class AllSongsActivity extends AppCompatActivity {
         });
     }
 
-    private void receiveValues()
-    {
-        Toast.makeText(AllSongsActivity.this, getString(R.string.registerSuccess),Toast.LENGTH_SHORT);
+    private void receiveValues() {
+        Toast.makeText(AllSongsActivity.this, getString(R.string.registerSuccess), Toast.LENGTH_SHORT);
         Intent intent = getIntent();
-        if (intent.hasExtra(Constants.REGISTER_SUCCESS))
-        {
+        if (intent.hasExtra(Constants.REGISTER_SUCCESS)) {
             String userString = intent.getStringExtra(Constants.REGISTER_SUCCESS);
             user = new Gson().fromJson(userString, User.class);
         }

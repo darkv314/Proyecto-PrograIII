@@ -45,6 +45,7 @@ public class PlayerActivity extends AppCompatActivity
 
     SqliteHelper sqliteHelper;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -62,9 +63,13 @@ public class PlayerActivity extends AppCompatActivity
         Intent intent = getIntent();
         if (intent.hasExtra(Constants.INTENT_SONG_NAME))
         {
+            UserRepository userRepository = new UserRepository(this);
+            numberOfTimes= userRepository.getNumberOfTimes();
             String songName = intent.getStringExtra(Constants.INTENT_SONG_NAME);
             song = new Gson().fromJson(songName, AllSongsTask.class);
+
         }
+
     }
 
     private void initViews()
@@ -166,7 +171,7 @@ public class PlayerActivity extends AppCompatActivity
 
         enterVault.setOnClickListener(new View.OnClickListener() {
 
-             UserRepository userRepository = new UserRepository(PlayerActivity.this);
+
 
             @Override
             public void onClick(View v)
@@ -174,8 +179,9 @@ public class PlayerActivity extends AppCompatActivity
                 Log.e("MY_APP_TAG", "Has entered the click ");
 
                 enterVaultCont++;
-
-                if(userRepository.login(enterVaultCont))
+                    Log.e("MY_APP_TAG", String.valueOf(enterVaultCont));
+                      Log.e("MY_KEY", String.valueOf(numberOfTimes));
+                if(numberOfTimes==enterVaultCont)
                 {
                     Log.e("MY_APP_TAG", "Has entered the condition ");
                     enterVaultCont = 0;

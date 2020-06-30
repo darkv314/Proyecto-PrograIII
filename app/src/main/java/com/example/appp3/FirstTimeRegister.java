@@ -22,7 +22,7 @@ public class FirstTimeRegister extends AppCompatActivity
     SqliteHelper sqliteHelper;
 
 
-
+  //  String clicks = "clicks" ;
     String firstRegister = "firstRegister";
     @Override
     protected void onResume() {
@@ -31,9 +31,11 @@ public class FirstTimeRegister extends AppCompatActivity
         if (!sharedpreferences.getBoolean(firstRegister, false)) {
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putBoolean(firstRegister, Boolean.TRUE);
+        ////////////////    editor.putString(clicks,Integer.toString(EditText.AUTOFILL_TYPE_TEXT));
             editor.apply();
         } else {
             Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
+         //   Intent player = new Intent (FirstTimeRegister.this, PlayerActivity.class);
             startActivity(allSongs);
         }
     }
@@ -51,8 +53,8 @@ public class FirstTimeRegister extends AppCompatActivity
         context = this;
         setContentView(R.layout.activity_form);
         UserRepository userRepository = new UserRepository( FirstTimeRegister.this);
-        User userLogged = userRepository.getUserLogged();
-        if(userLogged != null) {
+        int userLogged = userRepository.getNumberOfTimes();
+        if(userLogged == 0) {
             Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
             startActivity(allSongs);
         }else{
@@ -66,6 +68,7 @@ public class FirstTimeRegister extends AppCompatActivity
     {
         setPassword = findViewById(R.id.passwordText);
         setNumberOfTimes = findViewById(R.id.numberOfTimes);
+      //  Log.e("SET", String.valueOf(setNumberOfTimes));
         doneButton = findViewById(R.id.doneButton);
         sqliteHelper = new SqliteHelper(this);
     }
@@ -105,12 +108,14 @@ public class FirstTimeRegister extends AppCompatActivity
             return;
         }
 
-        User user = new User(null, nOfTimes, pass);
+       User user = new User(null, nOfTimes, pass);
 
         UserRepository userRepository = new UserRepository(context);
-        userRepository.register(user);
+        userRepository.setNumberOfTimes(Integer.parseInt(nOfTimes));
+
         sqliteHelper.addUser(user);
         Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
+
         startActivity(allSongs);
     }
 }
