@@ -18,39 +18,48 @@ public class FirstTimeRegister extends AppCompatActivity
     private EditText setPassword;
     private EditText setNumberOfTimes;
     private Button doneButton;
-
+    private Context context;
     SqliteHelper sqliteHelper;
 
 
 
-//    String firstRegister = "firstRegister";
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        SharedPreferences sharedpreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-//        if (!sharedpreferences.getBoolean(firstRegister, false)) {
-//            SharedPreferences.Editor editor = sharedpreferences.edit();
-//            editor.putBoolean(firstRegister, Boolean.TRUE);
-//            editor.apply();
-//        } else {
-//            Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
-//            startActivity(allSongs);
-//        }
-//    }
-//    @Override
-//    protected void onPause(){
-//        super.onPause();
-//        finish();
-//    }
+    String firstRegister = "firstRegister";
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedpreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        if (!sharedpreferences.getBoolean(firstRegister, false)) {
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putBoolean(firstRegister, Boolean.TRUE);
+            editor.apply();
+        } else {
+            Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
+            startActivity(allSongs);
+        }
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        finish();
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_form);
-        initViews();
-        addEvents();
+        UserRepository userRepository = new UserRepository( FirstTimeRegister.this);
+        User userLogged = userRepository.getUserLogged();
+        if(userLogged != null) {
+            Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
+            startActivity(allSongs);
+        }else{
+            initViews();
+            addEvents();
+        }
+
     }
 
     private void initViews()
@@ -97,7 +106,9 @@ public class FirstTimeRegister extends AppCompatActivity
         }
 
         User user = new User(null, nOfTimes, pass);
-        UserRepository.getInstance().register(user);
+
+        UserRepository userRepository = new UserRepository(context);
+        userRepository.register(user);
         sqliteHelper.addUser(user);
         Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
         startActivity(allSongs);

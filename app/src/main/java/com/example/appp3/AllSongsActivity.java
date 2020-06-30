@@ -1,9 +1,5 @@
 package com.example.appp3;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,13 +11,17 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.example.appp3.adapter.TaskAdapter;
 import com.example.appp3.model.User;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
-import  java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllSongsActivity extends AppCompatActivity {
 
@@ -163,7 +163,7 @@ public class AllSongsActivity extends AppCompatActivity {
                 "The Fugges"));
         items.add(new AllSongsTask(items.size(), "Loaded",
                 "Primal Screen"));
-        items.add(new AllSongsTask(items.size(), "...Baby One MOre Time",
+        items.add(new AllSongsTask(items.size(), "...Baby One More Time",
                 "Britney Spears"));
         items.add(new AllSongsTask(items.size(), "Torn",
                 "Natalie Imbruglia"));

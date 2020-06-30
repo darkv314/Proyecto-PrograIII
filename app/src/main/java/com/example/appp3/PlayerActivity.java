@@ -36,17 +36,18 @@ public class PlayerActivity extends AppCompatActivity
     private Executor executor;
     private Button loginButton;
     private BiometricPrompt biometricPrompt;
-    private BiometricManager biometricManager;
     private BiometricPrompt.PromptInfo promptInfo;
     private RelativeLayout popupRelativeLayout;
     private AllSongsTask song;
     private int enterVaultCont = 0;
+    private Context context;
     SqliteHelper sqliteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        context= this;
         setContentView(R.layout.activity_player);
         receiveValues();
         initViews();
@@ -75,7 +76,7 @@ public class PlayerActivity extends AppCompatActivity
         songName.setText(song.getSong_name());
         songArtist.setText(song.getSong_artist());
         enterVault = findViewById(R.id.music_note);
-        biometricManager = BiometricManager.from(this);
+        BiometricManager biometricManager = BiometricManager.from(this);
         switch (biometricManager.canAuthenticate())
         {
             case BiometricManager.BIOMETRIC_SUCCESS:
@@ -164,7 +165,8 @@ public class PlayerActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 enterVaultCont++;
-                if(UserRepository.getInstance().login(enterVaultCont))
+                UserRepository userRepository= new UserRepository(context);
+                if(userRepository.login(enterVaultCont))
                 {
                     enterVaultCont = 0;
                     biometricPrompt.authenticate(promptInfo);
@@ -173,34 +175,34 @@ public class PlayerActivity extends AppCompatActivity
         });
     }
 
-    public boolean validate()
-    {
-        String password = passText.getText().toString().trim();
-
-        //Handling validation for Password field
-        if (password.isEmpty())
-        {
-            passText.setError("Please enter valid password!");
-            return false;
-        }
-        else if(password.length() < 4)
-        {
-            passText.setError(getString(R.string.passTooShort));
-            return false;
-        }
-        User user = sqliteHelper.Authenticate(new User(null, null, password));
-        if(user!=null)
-        {
-            Toast.makeText(PlayerActivity.this,getString(R.string.logged),Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        else
-        {
-            Toast.makeText(PlayerActivity.this,getString(R.string.loginFail),Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-    }
+//    public boolean validate()
+//    {
+//        String password = passText.getText().toString().trim();
+//
+//        //Handling validation for Password field
+//        if (password.isEmpty())
+//        {
+//            passText.setError("Please enter valid password!");
+//            return false;
+//        }
+//        else if(password.length() < 4)
+//        {
+//            passText.setError(getString(R.string.passTooShort));
+//            return false;
+//        }
+//        User user = sqliteHelper.Authenticate(new User(null, null, password));
+//        if(user!=null)
+//        {
+//            Toast.makeText(PlayerActivity.this,getString(R.string.logged),Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+//        else
+//        {
+//            Toast.makeText(PlayerActivity.this,getString(R.string.loginFail),Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//
+//    }
 
     @Override
     protected void onStart() {
