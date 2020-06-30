@@ -6,11 +6,11 @@ public class SongItem {
     private String album;
     private String letter;
 
-    public SongItem(long id, String name, String album, String letter) {
+    public SongItem(long id, String name, String album) {
         this.id = id;
         this.name = name;
         this.album = album;
-        this.letter = letter;
+        this.letter = Character.toString(name.charAt(0));
 
     }
 

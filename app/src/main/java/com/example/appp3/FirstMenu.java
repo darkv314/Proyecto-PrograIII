@@ -109,41 +109,41 @@ public class FirstMenu extends AppCompatActivity{
     }
     private void initialSongs(){
         items.add(new SongItem(items.size(), "Can't Stop",
-                "Red Hot Chilli Peppers","C"));
+                "Red Hot Chilli Peppers"));
         items.add(new SongItem(items.size(), "Snow (Hey Oh)",
-                "Red Hot Chilli Pepper","S"));
+                "Red Hot Chilli Pepper"));
         items.add(new SongItem(items.size(), "Toxicity",
-                "System Of A Dawn","T"));
+                "System Of A Dawn"));
         items.add(new SongItem(items.size(), "High Hopes ",
-                "Panic! At The Disco","H"));
+                "Panic! At The Disco"));
         items.add(new SongItem(items.size(), "Inner City",
-                "Goldie","I"));
+                "Goldie"));
         items.add(new SongItem(items.size(), "Bittersweet Symphony",
-                "The Verve","B"));
+                "The Verve"));
         items.add(new SongItem(items.size(), "Killing in the Name",
-                "Rage Against The Machine","K"));
+                "Rage Against The Machine"));
         items.add(new SongItem(items.size(), "Sure Shot",
-                "Beastie Boys","S"));
+                "Beastie Boys"));
         items.add(new SongItem(items.size(), "Nothing Compare 2 U'",
-                "Sinnnead O'Connor","N"));
+                "Sinnnead O'Connor"));
         items.add(new SongItem(items.size(), "Born Slippy.Nuxx",
-                "Underworld","B"));
+                "Underworld"));
         items.add(new SongItem(items.size(), "Loser",
-                "Beck","T"));
+                "Beck"));
         items.add(new SongItem(items.size(), "Deceptacon",
-                "La Tigre","D"));
+                "La Tigre"));
         items.add(new SongItem(items.size(), "Paranoid Android",
-                "Radiohead","P"));
+                "Radiohead"));
         items.add(new SongItem(items.size(), "Doo Wop(That Thing)",
-                "Lauryn Hill","D"));
+                "Lauryn Hill"));
         items.add(new SongItem(items.size(), "Enter Sandman",
-                "Metallica","E"));
+                "Metallica"));
         items.add(new SongItem(items.size(), "Connection",
-                "Elastica","C"));
+                "Elastica"));
         items.add(new SongItem(items.size(), "Juicy",
-                "The Notorious Big","J"));
+                "The Notorious Big"));
         items.add(new SongItem(items.size(), "Poison",
-                "The Prodigy","P"));
+                "The Prodigy"));
     }
 }
 
