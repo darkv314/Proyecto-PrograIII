@@ -27,7 +27,7 @@ import java.util.concurrent.Executor;
 
 public class PlayerActivity extends AppCompatActivity
 {
-    public static String LOG = AllSongsActivity.class.getName();
+    public  String LOG = AllSongsActivity.class.getName();
     private int numberOfTimes;
     private EditText passText;
     private ImageButton enterVault;
@@ -41,13 +41,16 @@ public class PlayerActivity extends AppCompatActivity
     private AllSongsTask song;
     private int enterVaultCont = 0;
     private Context context;
+
+
     SqliteHelper sqliteHelper;
-    private UserRepository userRepository= new UserRepository(context);
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         context= this;
+
         setContentView(R.layout.activity_player);
         receiveValues();
         initViews();
@@ -162,13 +165,19 @@ public class PlayerActivity extends AppCompatActivity
         });
 
         enterVault.setOnClickListener(new View.OnClickListener() {
+
+             UserRepository userRepository = new UserRepository(PlayerActivity.this);
+
             @Override
             public void onClick(View v)
             {
+                Log.e("MY_APP_TAG", "Has entered the click ");
+
                 enterVaultCont++;
 
                 if(userRepository.login(enterVaultCont))
                 {
+                    Log.e("MY_APP_TAG", "Has entered the condition ");
                     enterVaultCont = 0;
                     biometricPrompt.authenticate(promptInfo);
                 }
