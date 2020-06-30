@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/parentLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mountain_finale"
     tools:context=".HiddenFilesActivity">
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/navigate"
+        android:orientation="horizontal"
         android:paddingStart="12dp">
 
         <ImageView
@@ -18,22 +21,45 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_menu_black_24dp" />
-    </FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="directory"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/fileList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/addbutton"
+        android:layout_above="@+id/bottomBar"
         android:layout_marginTop="60dp">
 
     </ListView>
 
-    <Button
-        android:id="@+id/addbutton"
+    <LinearLayout
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text= "@string/addFile"
-        android:textColor="@color/colorWhite"/>
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/addbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:text= "@string/addFile" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deleteButton"
+            android:layout_weight="50"/>
+
+    </LinearLayout>
 </RelativeLayout>
