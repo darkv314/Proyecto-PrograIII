@@ -100,7 +100,7 @@
                 android:id="@+id/songReproductor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="musica bonita para pasar"
+                android:text="Can't Stop"
                 android:textColor="@color/colorWhite"/>
 
             <TextView
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Desconocido"
+                android:text="Red Hot Chilli Peppers"
                 android:textColor="@color/colorWhite"/>
         </LinearLayout>
 
