@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.appp3.model.FileModel;
+import com.example.appp3.model.FilesModel;
+import com.example.appp3.model.FoldersModel;
+import com.example.appp3.repository.FoldersRepository;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
@@ -18,21 +20,23 @@ public class CreationFolder extends AppCompatActivity {
     private EditText path;
     private Button send;
     private Button clean;
+    private FoldersRepository foldersRepository;
     long cont = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_creation_folder);
+        foldersRepository = new FoldersRepository(getApplication());
+        setContentView(R.layout.activity_creation_file);
         initViews();
         addEvents();
     }
 
     private void initViews() {
-        name = findViewById(R.id.nameFolder);
-        path = findViewById(R.id.pathFolder);
-        send = findViewById(R.id.createButton);
-        clean = findViewById(R.id.limpButton);
+        name = findViewById(R.id.putName);
+        path = findViewById(R.id.pathFile);
+        send = findViewById(R.id.sendButton);
+        clean = findViewById(R.id.cleanButton);
     }
 
     private void addEvents() {
@@ -52,10 +56,9 @@ public class CreationFolder extends AppCompatActivity {
                     return;
                 }
 
-                FileModel file = new FileModel(cont++, nameFile, R.drawable.ic_player_playslist_play, pathFile);
+                FoldersModel folder = new FoldersModel(nameFile, R.drawable.ic_collections_black_24dp, pathFile);
                 Intent seeingFiles = new Intent(CreationFolder.this, HiddenFilesActivity.class);
-                String fileString = new Gson().toJson(file);
-                seeingFiles.putExtra(Constants.INTENT_FOLDER_CREATION, fileString);
+                foldersRepository.insert(folder);
                 startActivity(seeingFiles);
             }
         });

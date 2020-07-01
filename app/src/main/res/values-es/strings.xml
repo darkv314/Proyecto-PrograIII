@@ -35,4 +35,6 @@
     <string name="pathFile">Ruta</string>
     <string name="send">Crear</string>
     <string name="clean">Limpiar</string>
+    <string name="size">Size</string>
+    <string name="datec">Fecha de creación</string>
 </resources>

@@ -251,20 +251,22 @@
 package com.example.appp3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.appp3.adapter.FilesAdapter;
 import com.example.appp3.adapter.ListFilesAdapter;
-import com.example.appp3.model.FileModel;
-import com.example.appp3.model.FilesV;
-import com.example.appp3.SeeingFilesActivity;
+import com.example.appp3.model.FoldersModel;
+import com.example.appp3.model.FilesModel;
+import com.example.appp3.model.FoldersModel;
+import com.example.appp3.repository.FoldersRepository;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
@@ -274,23 +276,36 @@ import java.util.List;
 public class HiddenFilesActivity extends AppCompatActivity {
 
     private Context context;
-    private List<FileModel> items = new ArrayList<>();
-    private List<FilesV> fileItems = new ArrayList<>();
+    private List<FoldersModel> items = new ArrayList<>();
+    private List<FilesModel> fileItems = new ArrayList<>();
 
     private ListView fileListView;
     private ListFilesAdapter adapter;
     private Button addButton;
+    private FoldersRepository foldersRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
 
+        foldersRepository = new FoldersRepository(getApplication());
         setContentView(R.layout.activity_hidden_files);
         initViews();
         addEvents();
-        fillQuarantineTasks();
+        //fillQuarantineTasks();
         receiveValues();
+
+        foldersRepository.getAll().observe(this, new Observer<List<FoldersModel>>() {
+            @Override
+            public void onChanged(List<FoldersModel> foldersModels) {
+                Log.e("onChanged.quarantine", "" + foldersModels.size());
+                items = foldersModels;
+
+                adapter.setItems(foldersModels);
+                adapter.notifyDataSetChanged();
+            }
+        });
 
     }
     private void initViews() {
@@ -317,15 +332,15 @@ public class HiddenFilesActivity extends AppCompatActivity {
         });
     }
 
-    private void fillQuarantineTasks() {
-        items.add(new FileModel(items.size(), "Files",R.drawable.ic_player_playslist_play, "/storage/extSdCard"));
-        items.add(new FileModel(items.size(), "Images",R.drawable.ic_player_playslist_play, "/storage/extSdCard"));
-    }
+//    private void fillQuarantineTasks() {
+//        items.add(new FileModel(items.size(), "Files",R.drawable.ic_player_playslist_play, "/storage/extSdCard"));
+//        items.add(new FileModel(items.size(), "Images",R.drawable.ic_player_playslist_play, "/storage/extSdCard"));
+//    }
     private void receiveValues() {
         Intent intent = getIntent();
         if (intent.hasExtra(Constants.INTENT_FOLDER_CREATION)) {
             String fileObj = intent.getStringExtra(Constants.INTENT_FOLDER_CREATION);
-            FileModel file = new Gson().fromJson(fileObj, FileModel.class);
+            FoldersModel file = new Gson().fromJson(fileObj, FoldersModel.class);
             items.add(file);
             adapter.notifyDataSetChanged();
         }

@@ -1,18 +1,27 @@
 package com.example.appp3.model;
 
-public class FilesV {
-    private long id;
-    private String name;
-    private String size;
-    private String creation;
-    private int image;
-    private String path;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-    public FilesV(long id, String name, String size, String creation, int image, String path) {
-        this.id = id;
+@Entity(tableName = "folders")
+public class FoldersModel {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private long id;
+
+    @ColumnInfo(name = "name")
+    private String name;
+
+    private int image;
+
+    @ColumnInfo(name = "path")
+    private  String path;
+
+    public FoldersModel(String name, int image, String path) {
         this.name = name;
-        this.size = size;
-        this.creation = creation;
         this.image = image;
         this.path = path;
     }
@@ -33,22 +42,6 @@ public class FilesV {
         this.name = name;
     }
 
-    public String getCreation() {
-        return creation;
-    }
-
-    public void setCreation(String duration) {
-        this.creation = creation;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String details) {
-        this.creation = size;
-    }
-
     public int getImage() {
         return image;
     }
@@ -56,6 +49,7 @@ public class FilesV {
     public void setImage(int image) {
         this.image = image;
     }
+
     public String getPath() {
         return path;
     }
@@ -63,4 +57,5 @@ public class FilesV {
     public void setPath(String path) {
         this.path = path;
     }
+
 }

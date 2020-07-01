@@ -7,19 +7,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import org.w3c.dom.Text;
 
 import com.example.appp3.R;
-import com.example.appp3.model.FilesV;
+import com.example.appp3.model.FilesModel;
+import com.example.appp3.model.FoldersModel;
 
 import java.util.List;
 
 public class FilesAdapter extends BaseAdapter {
 
     private Context context;
-    private List<FilesV> items;
+    private List<FilesModel> items;
 
-    public FilesAdapter(Context context, List<FilesV> items) {
+    public FilesAdapter(Context context, List<FilesModel> items) {
         this.context = context;
         this.items = items;
     }
@@ -30,7 +30,7 @@ public class FilesAdapter extends BaseAdapter {
     }
 
     @Override
-    public FilesV getItem(int position) {
+    public FilesModel getItem(int position) {
         return this.items.get(position);
     }
 
@@ -65,7 +65,7 @@ public class FilesAdapter extends BaseAdapter {
         }
 
         //Sí o sí tenemos una vista, ya sea reciclada o nueva
-        FilesV task = this.items.get(position);
+        FilesModel task = this.items.get(position);
         viewHolder.nameFileView.setText(task.getName());
         viewHolder.sizeFileView.setText(task.getSize());
         viewHolder.creationDateView.setText(task.getCreation());
@@ -78,5 +78,10 @@ public class FilesAdapter extends BaseAdapter {
         TextView sizeFileView;
         TextView creationDateView;
         ImageView iconFileImageView;
+    }
+
+    public void setItems(List<FilesModel> items)
+    {
+        this.items = items;
     }
 }

@@ -35,4 +35,6 @@
     <string name="send">Create</string>
     <string name="clean">Clean</string>
     <string name="deleteButton">Delete file</string>
+    <string name="size">Size</string>
+    <string name="datec">Date created</string>
 </resources>
