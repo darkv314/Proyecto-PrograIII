@@ -27,16 +27,16 @@ public class CreationFolder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         foldersRepository = new FoldersRepository(getApplication());
-        setContentView(R.layout.activity_creation_file);
+        setContentView(R.layout.activity_creation_folder);
         initViews();
         addEvents();
     }
 
     private void initViews() {
-        name = findViewById(R.id.putName);
-        path = findViewById(R.id.pathFile);
-        send = findViewById(R.id.sendButton);
-        clean = findViewById(R.id.cleanButton);
+        name = findViewById(R.id.nameFolder);
+        path = findViewById(R.id.pathFolder);
+        send = findViewById(R.id.createButton);
+        clean = findViewById(R.id.limpButton);
     }
 
     private void addEvents() {
@@ -59,7 +59,9 @@ public class CreationFolder extends AppCompatActivity {
                 FoldersModel folder = new FoldersModel(nameFile, R.drawable.ic_collections_black_24dp, pathFile);
                 Intent seeingFiles = new Intent(CreationFolder.this, HiddenFilesActivity.class);
                 foldersRepository.insert(folder);
-                startActivity(seeingFiles);
+                //startActivity(seeingFiles);
+                finish();
+                //onDestroy();
             }
         });
         clean.setOnClickListener(new View.OnClickListener() {
@@ -69,5 +71,10 @@ public class CreationFolder extends AppCompatActivity {
                 path.setText("");
             }
         });
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
     }
 }

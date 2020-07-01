@@ -65,7 +65,9 @@ public class CreationFile extends AppCompatActivity {
                 FilesModel files = new FilesModel(nameFile,sizeFile,dateFile, R.drawable.ic_collections_black_24dp, pathFile);
                 Intent seeingFiles = new Intent(CreationFile.this, SeeingFilesActivity.class);
                 filesRepository.insert(files);
-                startActivity(seeingFiles);
+                //startActivity(seeingFiles);
+                finish();
+                //onDestroy();
             }
         });
         clean.setOnClickListener(new View.OnClickListener() {
@@ -75,5 +77,10 @@ public class CreationFile extends AppCompatActivity {
                 path.setText("");
             }
         });
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
     }
 }

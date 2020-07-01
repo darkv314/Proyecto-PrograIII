@@ -18,6 +18,8 @@ public class FilesModel {
     private int image;
     @ColumnInfo(name = "path")
     private String path;
+    @ColumnInfo(name = "numberOfClicks")
+    private int numberOfClicks;
 
     public FilesModel(String name, String size, String creation, int image, String path) {
         this.name = name;
@@ -25,6 +27,15 @@ public class FilesModel {
         this.creation = creation;
         this.image = image;
         this.path = path;
+        this.numberOfClicks = 0;
+    }
+
+    public int getNumberOfClicks() {
+        return numberOfClicks;
+    }
+
+    public void setNumberOfClicks(int numberOfClicks) {
+        this.numberOfClicks = numberOfClicks;
     }
 
     public long getId() {

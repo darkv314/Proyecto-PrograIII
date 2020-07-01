@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -71,7 +72,7 @@ public class SeeingFilesActivity extends AppCompatActivity
         RelativeLayout.LayoutParams listLayoutParams = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        listLayoutParams.addRule(RelativeLayout.ABOVE,FOOTER_ID);
+        listLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         listView.setLayoutParams(listLayoutParams);
         adapter = new FilesAdapter(context, items);
         listView.setAdapter(adapter);
@@ -100,6 +101,15 @@ public class SeeingFilesActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent creation = new Intent(SeeingFilesActivity.this, CreationFile.class);
                 startActivity(creation);
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("This is the id:", String.valueOf(id));
+                FilesModel filesModel = items.get(position);
+                filesModel.setNumberOfClicks(filesModel.getNumberOfClicks()+1);
+                filesRepository.updateEntry(filesModel);
             }
         });
     }

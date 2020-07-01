@@ -260,6 +260,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.appp3.adapter.ListFilesAdapter;
@@ -283,6 +284,8 @@ public class HiddenFilesActivity extends AppCompatActivity {
     private ListFilesAdapter adapter;
     private Button addButton;
     private FoldersRepository foldersRepository;
+    private LinearLayout hiddenLinear;
+    private Button deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -313,6 +316,8 @@ public class HiddenFilesActivity extends AppCompatActivity {
         adapter = new ListFilesAdapter(context, items);
         fileListView.setAdapter(adapter);
         addButton = findViewById(R.id.addbutton);
+        hiddenLinear = findViewById(R.id.bottomBardelete);
+        deleteButton = findViewById(R.id.deleteButton);
     }
 
     private void addEvents() {
@@ -330,6 +335,14 @@ public class HiddenFilesActivity extends AppCompatActivity {
                 startActivity(fistrMenu);
             }
         });
+
+        /*fileListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                hiddenLinear.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });*/
     }
 
 //    private void fillQuarantineTasks() {

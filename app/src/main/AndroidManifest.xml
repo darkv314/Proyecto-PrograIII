@@ -16,8 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreationFolder"></activity>
-        <activity android:name=".CreationFile" />
+        <activity android:name=".CreationFolder"
+            android:parentActivityName=".HiddenFilesActivity"/>
+        <activity android:name=".CreationFile"
+            android:parentActivityName=".SeeingFilesActivity"/>
         <activity
             android:name=".FirstTimeRegister"
             android:theme="@style/Theme.AppCompat.NoActionBar">

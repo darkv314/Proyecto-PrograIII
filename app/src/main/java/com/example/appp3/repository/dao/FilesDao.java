@@ -2,6 +2,7 @@ package com.example.appp3.repository.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -22,4 +23,7 @@ public interface FilesDao
 
     @Query("SELECT * FROM files ORDER BY id ASC")
     LiveData<List<FilesModel>> getAll();
+
+    @Delete
+    void deleteFile(FilesModel file);
 }
