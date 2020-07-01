@@ -10,17 +10,22 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.appp3.utils.Constants;
 import com.google.android.material.navigation.NavigationView;
 import com.example.appp3.adapter.SongRecyclerViewAdapter;
 import com.example.appp3.adapter.SongViewHolder;
 import com.example.appp3.callback.SongClickCallBack;
 import com.example.appp3.model.SongItem;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +33,7 @@ import java.util.List;
 public class FirstMenu extends AppCompatActivity{
 
     private Context context;
-    private List<SongItem> items = new ArrayList<>();
+    private List<AllSongsTask> items = new ArrayList<>();
     private FrameLayout backGroundBarra;
     private TextView nameSong;
     private TextView album;
@@ -40,6 +45,9 @@ public class FirstMenu extends AppCompatActivity{
     private LinearLayout barra;
     private RecyclerView songRecyclerView;
     private SongRecyclerViewAdapter adapter;
+    private ImageButton play;
+    private int pauseTime;
+    private MediaPlayer mp;
     private SongViewHolder SongViewHolder;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -47,6 +55,8 @@ public class FirstMenu extends AppCompatActivity{
     private NavigationView navigationView;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+
+    private AllSongsTask canc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +69,7 @@ public class FirstMenu extends AppCompatActivity{
 
     }
     private void initViews() {
+        play = findViewById(R.id.play);
         settings = findViewById(R.id.settings1);
         change = findViewById(R.id.listSongs);
         barra = findViewById(R.id.barraReproductor);
@@ -91,9 +102,10 @@ public class FirstMenu extends AppCompatActivity{
         });
         adapter.setCallback(new SongClickCallBack() {
             @Override
-            public void onSongClick(SongItem song) {
-                nameSong.setText(song.getName());
-                album.setText(song.getAlbum());
+            public void onSongClick(AllSongsTask song) {
+                canc = song;
+                nameSong.setText(song.getSong_name());
+                album.setText(song.getSong_name());
                 letra.setText(song.getLetter());
                 adapter.notifyDataSetChanged();
             }
@@ -105,45 +117,112 @@ public class FirstMenu extends AppCompatActivity{
                 startActivity(change);
             }
         });
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mp == null){
+                    mp = MediaPlayer.create(FirstMenu.this, R.raw.cant_stop);
+                    mp.start();
+                }else if(!mp.isPlaying()){
+                    mp.seekTo(pauseTime);
+                    mp.start();
+                    play.setImageResource(R.drawable.ic_player_pause);
+                }else{
+                    mp.pause();
+                    pauseTime = mp.getCurrentPosition();
+                    play.setImageResource(R.drawable.ic_player_play_arrow);
+                }
+            }
+        });
+        barra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent musicPlayer = new Intent(FirstMenu.this, PlayerActivity.class);
+                String songName = new Gson().toJson(canc);
+                musicPlayer.putExtra(Constants.INTENT_SONG_NAME, songName);
+                startActivity(musicPlayer);
+                adapter.notifyDataSetChanged();
+            }
+        });
 
     }
     private void initialSongs(){
-        items.add(new SongItem(items.size(), "Can't Stop",
+        items.add(new AllSongsTask(items.size(), "Can't Stop",
                 "Red Hot Chilli Peppers"));
-        items.add(new SongItem(items.size(), "Snow (Hey Oh)",
+        items.add(new AllSongsTask(items.size(), "Snow (Hey Oh)",
                 "Red Hot Chilli Pepper"));
-        items.add(new SongItem(items.size(), "Toxicity",
+        items.add(new AllSongsTask(items.size(), "Toxicity",
                 "System Of A Dawn"));
-        items.add(new SongItem(items.size(), "High Hopes ",
+        items.add(new AllSongsTask(items.size(), "High Hopes",
                 "Panic! At The Disco"));
-        items.add(new SongItem(items.size(), "Inner City",
-                "Goldie"));
-        items.add(new SongItem(items.size(), "Bittersweet Symphony",
-                "The Verve"));
-        items.add(new SongItem(items.size(), "Killing in the Name",
-                "Rage Against The Machine"));
-        items.add(new SongItem(items.size(), "Sure Shot",
-                "Beastie Boys"));
-        items.add(new SongItem(items.size(), "Nothing Compare 2 U'",
-                "Sinnnead O'Connor"));
-        items.add(new SongItem(items.size(), "Born Slippy.Nuxx",
-                "Underworld"));
-        items.add(new SongItem(items.size(), "Loser",
-                "Beck"));
-        items.add(new SongItem(items.size(), "Deceptacon",
-                "La Tigre"));
-        items.add(new SongItem(items.size(), "Paranoid Android",
-                "Radiohead"));
-        items.add(new SongItem(items.size(), "Doo Wop(That Thing)",
+        items.add(new AllSongsTask(items.size(), "All That She Wants",
+                "Ace of Base"));
+        items.add(new AllSongsTask(items.size(), "Your Woman",
+                "White Town"));
+        items.add(new AllSongsTask(items.size(), "Fantasy",
+                "Mariah Carey"));
+        items.add(new AllSongsTask(items.size(), "Undone-The Sweater Song",
+                "Weezer"));
+        items.add(new AllSongsTask(items.size(), "Cannonball",
+                "The Breeders"));
+        items.add(new AllSongsTask(items.size(), "Killing My Softly",
+                "The Fugges"));
+        items.add(new AllSongsTask(items.size(), "Loaded",
+                "Primal Screen"));
+        items.add(new AllSongsTask(items.size(), "...Baby One MOre Time",
+                "Britney Spears"));
+        items.add(new AllSongsTask(items.size(), "Torn",
+                "Natalie Imbruglia"));
+        items.add(new AllSongsTask(items.size(), "On a Ragga Tip",
+                "SL2"));
+        items.add(new AllSongsTask(items.size(), "Say You'll Be There",
+                "Spice Girls"));
+        items.add(new AllSongsTask(items.size(), "You Don't Know Me",
+                "Armand Van Helden"));
+        items.add(new AllSongsTask(items.size(), "Ray of Light",
+                "Madonna"));
+        items.add(new AllSongsTask(items.size(), "Pony",
+                "Guinuwine"));
+        items.add(new AllSongsTask(items.size(), "1979",
+                "Smashing Pumpkings"));
+        items.add(new AllSongsTask(items.size(), "You Oughta Know",
+                "Alanis Morisette"));
+        items.add(new AllSongsTask(items.size(), "Animale Nitrade",
+                "Suede"));
+        items.add(new AllSongsTask(items.size(), "Step On",
+                "Happy Mondays"));
+        items.add(new AllSongsTask(items.size(), "Windowlicker",
+                "Aphex Twin"));
+        items.add(new AllSongsTask(items.size(), "Rebel Girl",
+                "Bikini Kill"));
+        items.add(new AllSongsTask(items.size(), "Doo Wop(That Thing)",
                 "Lauryn Hill"));
-        items.add(new SongItem(items.size(), "Enter Sandman",
+        items.add(new AllSongsTask(items.size(), "Enter Sandman",
                 "Metallica"));
-        items.add(new SongItem(items.size(), "Connection",
+        items.add(new AllSongsTask(items.size(), "Connection",
                 "Elastica"));
-        items.add(new SongItem(items.size(), "Juicy",
+        items.add(new AllSongsTask(items.size(), "Juicy",
                 "The Notorious Big"));
-        items.add(new SongItem(items.size(), "Poison",
+        items.add(new AllSongsTask(items.size(), "Poison",
                 "The Prodigy"));
+        items.add(new AllSongsTask(items.size(), "Inner City",
+                "Goldie"));
+        items.add(new AllSongsTask(items.size(), "Bittersweet Symphony",
+                "The Verve"));
+        items.add(new AllSongsTask(items.size(), "Killing in the Name",
+                "Rage Against The Machine"));
+        items.add(new AllSongsTask(items.size(), "Sure Shot",
+                "Beastie Boys"));
+        items.add(new AllSongsTask(items.size(), "Nothing Compare 2 U'",
+                "Sinnnead O'Connor"));
+        items.add(new AllSongsTask(items.size(), "Born Slippy.Nuxx",
+                "Underworld"));
+        items.add(new AllSongsTask(items.size(), "Loser",
+                "Beck"));
+        items.add(new AllSongsTask(items.size(), "Deceptacon",
+                "La Tigre"));
+        items.add(new AllSongsTask(items.size(), "Paranoid Android",
+                "Radiohead"));
     }
 }
 

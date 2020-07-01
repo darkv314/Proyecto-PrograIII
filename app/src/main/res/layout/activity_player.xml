@@ -87,6 +87,7 @@
                     app:srcCompat="@drawable/ic_player_skip_previous" />
 
                 <ImageButton
+                    android:id="@+id/playButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@null"
@@ -95,6 +96,13 @@
                     app:srcCompat="@drawable/ic_player_play_arrow">
 
                 </ImageButton>
+
+                <ImageButton
+                    android:id="@+id/pauseButton"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    app:srcCompat="@drawable/ic_player_pause" />
 
                 <ImageButton
                     android:layout_width="wrap_content"

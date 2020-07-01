@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appp3.AllSongsTask;
 import com.example.appp3.callback.SongClickCallBack;
 import com.example.appp3.model.SongItem;
 import com.example.appp3.R;
@@ -19,12 +20,12 @@ import java.util.Random;
 public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongViewHolder> {
 
     private Context context;
-    private List<SongItem> items;
+    private List<AllSongsTask> items;
     private LayoutInflater inflater;
 
     private SongClickCallBack callback;
 
-    public SongRecyclerViewAdapter(Context context, List<SongItem> items) {
+    public SongRecyclerViewAdapter(Context context, List<AllSongsTask> items) {
         this.context = context;
         this.items = items;
         this.inflater = LayoutInflater.from(context);
@@ -40,9 +41,9 @@ public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SongViewHolder holder, int position) {
-        final SongItem song = this.items.get(position);
-        holder.nameSongTextView.setText(song.getName());
-        holder.albumTextView.setText(song.getAlbum());
+        final AllSongsTask song = this.items.get(position);
+        holder.nameSongTextView.setText(song.getSong_name());
+        holder.albumTextView.setText(song.getSong_artist());
         holder.firstLetterTextView.setText(song.getLetter());
         Random random = new Random();
         int color = Color.argb(255, random.nextInt(256), random.nextInt(256),random.nextInt(256));

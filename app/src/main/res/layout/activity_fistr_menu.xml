@@ -131,7 +131,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@null"
-                app:srcCompat="@drawable/ic_player_pause" />
+                app:srcCompat="@drawable/ic_player_play_arrow" />
 
             <ImageButton
                 android:id="@+id/adelante"
