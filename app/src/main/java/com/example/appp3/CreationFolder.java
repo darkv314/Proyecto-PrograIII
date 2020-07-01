@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.appp3.model.FileModel;
+import com.example.appp3.model.FilesModel;
+import com.example.appp3.model.FoldersModel;
+import com.example.appp3.repository.FoldersRepository;
 import com.example.appp3.utils.Constants;
 import com.google.gson.Gson;
 
@@ -18,11 +20,13 @@ public class CreationFolder extends AppCompatActivity {
     private EditText path;
     private Button send;
     private Button clean;
+    private FoldersRepository foldersRepository;
     long cont = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        foldersRepository = new FoldersRepository(getApplication());
         setContentView(R.layout.activity_creation_folder);
         initViews();
         addEvents();
@@ -52,11 +56,12 @@ public class CreationFolder extends AppCompatActivity {
                     return;
                 }
 
-                FileModel file = new FileModel(cont++, nameFile, R.drawable.ic_player_playslist_play, pathFile);
+                FoldersModel folder = new FoldersModel(nameFile, R.drawable.ic_collections_black_24dp, pathFile);
                 Intent seeingFiles = new Intent(CreationFolder.this, HiddenFilesActivity.class);
-                String fileString = new Gson().toJson(file);
-                seeingFiles.putExtra(Constants.INTENT_FOLDER_CREATION, fileString);
-                startActivity(seeingFiles);
+                foldersRepository.insert(folder);
+                //startActivity(seeingFiles);
+                finish();
+                //onDestroy();
             }
         });
         clean.setOnClickListener(new View.OnClickListener() {
@@ -66,5 +71,10 @@ public class CreationFolder extends AppCompatActivity {
                 path.setText("");
             }
         });
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
     }
 }

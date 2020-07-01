@@ -59,4 +59,6 @@ or via the UPI address %2$s</string>
     <string name="deseg_gd">Graphics Designer ;)</string>
     <string name="abou_us">About Us</string>
 
+    <string name="size">Size</string>
+    <string name="datec">Fecha de creación</string>
 </resources>

@@ -1,20 +1,41 @@
 package com.example.appp3.model;
 
-public class FilesV {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "files")
+public class FilesModel {
+    @PrimaryKey (autoGenerate = true)
+    @ColumnInfo(name = "id")
     private long id;
+    @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "size")
     private String size;
+    @ColumnInfo(name = "creation_date")
     private String creation;
     private int image;
+    @ColumnInfo(name = "path")
     private String path;
+    @ColumnInfo(name = "numberOfClicks")
+    private int numberOfClicks;
 
-    public FilesV(long id, String name, String size, String creation, int image, String path) {
-        this.id = id;
+    public FilesModel(String name, String size, String creation, int image, String path) {
         this.name = name;
         this.size = size;
         this.creation = creation;
         this.image = image;
         this.path = path;
+        this.numberOfClicks = 0;
+    }
+
+    public int getNumberOfClicks() {
+        return numberOfClicks;
+    }
+
+    public void setNumberOfClicks(int numberOfClicks) {
+        this.numberOfClicks = numberOfClicks;
     }
 
     public long getId() {

@@ -1,16 +1,27 @@
 package com.example.appp3.model;
 
-public class FileModel {
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "folders")
+public class FoldersModel {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     private long id;
+
+    @ColumnInfo(name = "name")
     private String name;
-    private boolean finished;
+
     private int image;
+
+    @ColumnInfo(name = "path")
     private  String path;
 
-    public FileModel(long id, String name, int image, String path) {
-        this.id = id;
+    public FoldersModel(String name, int image, String path) {
         this.name = name;
-        this.finished = false;
         this.image = image;
         this.path = path;
     }
@@ -29,14 +40,6 @@ public class FileModel {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isFinished() {
-        return finished;
-    }
-
-    public void setFinished(boolean finished) {
-        this.finished = finished;
     }
 
     public int getImage() {
