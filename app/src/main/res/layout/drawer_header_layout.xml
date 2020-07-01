@@ -20,7 +20,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:gravity="start"
-        android:text="Configuración"
+        android:text="@string/settings_head"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorGrey"
         android:textSize="20sp"

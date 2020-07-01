@@ -35,4 +35,28 @@
     <string name="pathFile">Ruta</string>
     <string name="send">Crear</string>
     <string name="clean">Limpiar</string>
+    <string name="settings_head">Ajustes</string>
+
+    <string name="app_name_full">HiSky</string>
+    <string name="authors">Authors</string>
+    <string name="info">Info</string>
+    <string name="ver">Version</string>
+    <string name="dunno">Spice Girls</string>
+    <string name="support">Support</string>
+    <string name="telegram">Telegram</string>
+    <string name="wapp">Whats App</string>
+    <string name="donate">  Donate</string>
+    <string name="donate_subtext">Hey everyone! It took a lot of hard work to turn this project into reality, and I hope you\'re enjoying it! If you like the project and want it to continue, please consider donating. It motivates me to keep working on it.
+
+
+You can donate via %1$s
+or via the UPI address %2$s</string>
+    <string name="about_also">Also, huge thanks to the NewPipe team for the extractor.</string>
+    <string name="darkv314">Ricardo Tejerina</string>
+    <string name="mik43la">Mikaela Cárdenas</string>
+    <string name="laBalaElmo">Juan Rodrigo Tordoya</string>
+    <string name="aleS900">Santiago Vargas</string>
+    <string name="deseg_gd">Graphics Designer ;)</string>
+    <string name="abou_us">About Us</string>
+
 </resources>
