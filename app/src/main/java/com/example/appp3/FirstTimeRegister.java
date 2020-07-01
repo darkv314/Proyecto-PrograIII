@@ -18,6 +18,7 @@ public class FirstTimeRegister extends AppCompatActivity
     UserSQLiteHelper userSQLiteHelper;
 
     String firstRegister = "firstRegister";
+    private Context context;
     @Override
     protected void onResume() {
         super.onResume();

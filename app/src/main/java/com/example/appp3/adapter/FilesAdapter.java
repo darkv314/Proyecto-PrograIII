@@ -57,6 +57,7 @@ public class FilesAdapter extends BaseAdapter {
             viewHolder.sizeFileView = view.findViewById(R.id.fileSize);
             viewHolder.creationDateView = view.findViewById(R.id.creationDate);
             viewHolder.iconFileImageView = view.findViewById(R.id.iconFile);
+            viewHolder.numberOfClicks = view.findViewById(R.id.numberOfClicks);
 
             view.setTag(viewHolder); //Guardar para reciclar
         } else {
@@ -70,6 +71,7 @@ public class FilesAdapter extends BaseAdapter {
         viewHolder.sizeFileView.setText(task.getSize());
         viewHolder.creationDateView.setText(task.getCreation());
         viewHolder.iconFileImageView.setImageResource(task.getImage());
+        viewHolder.numberOfClicks.setText(String.valueOf(task.getNumberOfClicks()));
         return view;
     }
 
@@ -77,6 +79,7 @@ public class FilesAdapter extends BaseAdapter {
         TextView nameFileView;
         TextView sizeFileView;
         TextView creationDateView;
+        TextView numberOfClicks;
         ImageView iconFileImageView;
     }
 

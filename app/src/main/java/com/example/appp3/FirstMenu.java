@@ -63,8 +63,8 @@ public class FirstMenu extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(R.layout.activity_fistr_menu);
-        canc = items.get(0);
         initialSongs();
+        canc = items.get(0);
         initViews();
         addEvents();
 
