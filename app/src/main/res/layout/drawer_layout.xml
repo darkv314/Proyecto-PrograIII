@@ -7,11 +7,12 @@
     <include layout="@layout/drawer_header_layout" />
 
     <Button
+        android:id="@+id/langauges_but"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:textAlignment="viewStart"
-        android:text="@string/edit"
+        android:text="@string/langaugess"
         android:paddingStart="20dp"/>
 
     <Button

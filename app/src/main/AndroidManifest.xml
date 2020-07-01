@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CreationFolder"
-            android:parentActivityName=".HiddenFilesActivity"/>
+            android:parentActivityName=".HiddenFilesActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".CreationFile"
             android:parentActivityName=".SeeingFilesActivity"/>
         <activity
@@ -55,21 +56,7 @@
         <activity android:name=".Settings2Activity"
             android:theme="@style/AppThemeW"/>
         <service android:name=".PlayerActivity"/>
-        <activity android:name=".AllSongsActivity" />
-        <activity android:name=".RecyclerViewActivity" />
-        <activity
-            android:name=".PlayerActivity"
-            android:theme="@style/AppThemeW" />
-        <activity android:name=".PasswordActivity" />
-        <activity
-            android:name=".FirstMenu"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".HiddenFilesActivity" />
-        <activity android:name=".SeeingFilesActivity" />
-        <activity
-            android:name=".Settings1Activity"
-            android:theme="@style/AppThemeW" />
-        <activity
+
             android:name=".Settings2Activity"
             android:theme="@style/AppThemeW" />
 

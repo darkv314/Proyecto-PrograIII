@@ -16,7 +16,7 @@
     <string name="Done">Done</string>
     <string name="passTooShort">The password is too short!  It should contain at least 4 characters</string>
     <string name="numberNotAccepted">The number can\'t be 0!</string>
-    <string name="registerSuccess">User creater successfully! Enjoy ;)</string>
+    <string name="registerSuccess">User created successfully! Enjoy ;)</string>
     <string name="logged">Correctly logged in uwu</string>
     <string name="loginFail">Invalid password :(</string>
     <string name="change">VIEW</string>
@@ -45,11 +45,6 @@
     <string name="telegram">Telegram</string>
     <string name="wapp">Whats App</string>
     <string name="donate">  Donate</string>
-    <string name="donate_subtext">Hey everyone! It took a lot of hard work to turn this project into reality, and I hope you\'re enjoying it! If you like the project and want it to continue, please consider donating. It motivates me to keep working on it.
-
-
-You can donate via %1$s
-or via the UPI address %2$s</string>
     <string name="about_also">If you have any problem don\'t hesitate to CONTACT US. And if you liked this app please help us and DONATE.</string>
     <string name="darkv314">Ricardo Tejerina</string>
     <string name="mik43la">Mikaela Cárdenas</string>
@@ -57,7 +52,7 @@ or via the UPI address %2$s</string>
     <string name="aleS900">Santiago Vargas</string>
     <string name="deseg_gd">Graphics Designer ;)</string>
     <string name="abou_us">About Us</string>
-
+    <string name="langaugess">Language</string>
     <string name="size">Size</string>
     <string name="datec">Date created</string>
 </resources>

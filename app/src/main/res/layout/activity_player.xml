@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/amiko"
                 android:gravity="center_horizontal"
+                android:textColor="@color/colorGrey"
                 android:text="@string/song_Name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="20sp">
@@ -57,11 +58,14 @@
                 android:fontFamily="@font/amiko"
                 android:gravity="center_horizontal"
                 android:text="@string/song_Artist"
+                android:textColor="@color/colorGrey"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="12sp"
                 android:textStyle="bold">
 
             </TextView>
+
+
 
             <androidx.appcompat.widget.AppCompatSeekBar
                 android:id="@+id/song_progress"
@@ -70,6 +74,20 @@
                 android:layout_below="@+id/song_artist"
                 android:layout_gravity="center_vertical"
                 android:padding="25dp" />
+
+            <ImageButton
+                android:id="@+id/playButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:paddingLeft="15dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                android:paddingRight="15dp"
+                app:srcCompat="@drawable/ic_player_play_arrow">
+
+            </ImageButton>
 
             <LinearLayout
                 android:id="@+id/song_buttons"
@@ -84,24 +102,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginTop="20dp"
                     app:srcCompat="@drawable/ic_player_skip_previous" />
 
-                <ImageButton
-                    android:id="@+id/playButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_player_play_arrow">
 
-                </ImageButton>
 
                 <ImageButton
                     android:id="@+id/pauseButton"
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="100dp"
                     android:background="@null"
+                    android:layout_marginTop="20dp"
                     app:srcCompat="@drawable/ic_player_pause" />
 
                 <ImageButton
@@ -109,6 +121,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
                     app:srcCompat="@drawable/ic_player_skip_next" />
             </LinearLayout>
 
@@ -118,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/song_buttons"
                 android:paddingLeft="20dp"
+                android:layout_marginTop="30dp"
                 android:paddingRight="20dp">
 
                 <ImageButton
