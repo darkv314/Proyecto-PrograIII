@@ -10,6 +10,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appp3.model.User;
+import com.example.appp3.repository.UserRepository;
+
 public class FirstTimeRegister extends AppCompatActivity
 {
     private EditText setPassword;
@@ -42,9 +45,18 @@ public class FirstTimeRegister extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_form);
-        initViews();
-        addEvents();
+        UserRepository userRepository = new UserRepository( FirstTimeRegister.this);
+        int userLogged = userRepository.getNumberOfTimes();
+        if(userLogged == 0) {
+            Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
+            startActivity(allSongs);
+        }else{
+            initViews();
+            addEvents();
+        }
+
     }
 
     private void initViews()
@@ -89,6 +101,9 @@ public class FirstTimeRegister extends AppCompatActivity
             setNumberOfTimes.setError(getString(R.string.numberNotAccepted));
             return;
         }
+        User user = new User(null, pass, Integer.parseInt(nOfTimes));
+        UserRepository userRepository = new UserRepository(context);
+        userRepository.setNumberOfTimes(Integer.parseInt(nOfTimes));
         userSQLiteHelper.addUser(pass, Integer.parseInt(nOfTimes));
         Intent allSongs = new Intent(FirstTimeRegister.this, AllSongsActivity.class);
         startActivity(allSongs);
