@@ -3,8 +3,6 @@
     package="com.example.appp3">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" /> <!-- danger permissions -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -56,10 +54,6 @@
         <activity android:name=".Settings2Activity"
             android:theme="@style/AppThemeW"/>
         <service android:name=".PlayerActivity"/>
-
-            android:name=".Settings2Activity"
-            android:theme="@style/AppThemeW" />
-
         <service android:name=".PlayerActivity" />
 
         <meta-data
