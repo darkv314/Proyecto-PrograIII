@@ -32,7 +32,7 @@ import java.util.List;
 
 public class FirstMenu extends AppCompatActivity{
 
-    private Context context;
+    /*private Context context;
     private List<AllSongsTask> items = new ArrayList<>();
     private FrameLayout backGroundBarra;
     private TextView nameSong;
@@ -224,6 +224,6 @@ public class FirstMenu extends AppCompatActivity{
                 "La Tigre"));
         items.add(new AllSongsTask(items.size(), "Paranoid Android",
                 "Radiohead"));
-    }
+    }*/
 }
 
