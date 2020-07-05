@@ -1,13 +1,18 @@
 package com.example.appp3;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -32,6 +37,7 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.appp3.model.User;
+import com.example.appp3.services.OnClearFromRecentService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -59,7 +65,41 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
     private ImageButton enterVault;
     private EditText passText;
     private User user;
+    NotificationManager notificationManager;
     UserSQLiteHelper userSQLiteHelper;
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getExtras().getString("actionName");
+
+            switch (action)
+            {
+                case CreateNotification.ACTION_PREVIOUS:
+                    prevBtnClicked();
+                    break;
+                case CreateNotification.ACTION_PLAY:
+                    playPauseBtnClicked();
+                    break;
+                case CreateNotification.ACTION_NEXT:
+                    nextBtnClicked();
+                    break;
+            }
+        }
+    };
+
+    /*private void onTrackPlay() {
+    }
+
+    private void onTrackNext() {
+    }
+
+    private void onTrackPause() {
+    }
+
+    private void onTrackPrev() {
+
+    }*/
+
     private int enterVaultCont = 0;
 
     private Handler handler = new Handler();
@@ -70,6 +110,8 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
         setContentView(R.layout.activity_player);
         initViews();
         receiveValues();
+        CreateNotification.CreateNotification(PlayerActivity.this, listSongs.get(position), R.drawable.ic_pause_black_24dp,
+                1, listSongs.size()-1);
         addEvents();
         song_name.setText(listSongs.get(position).getTitle());
         artist_name.setText(listSongs.get(position).getArtist());
@@ -103,6 +145,27 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
                 handler.postDelayed(this, 1000);
             }
         });
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            createChannel();
+            registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
+            startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
+        }
+    }
+
+    private void createChannel()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,"Music notification",NotificationManager.IMPORTANCE_LOW);
+
+            notificationManager = getSystemService(NotificationManager.class);
+            if(notificationManager !=null)
+            {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
     }
 
     private void addEvents()
@@ -188,6 +251,8 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
             mediaPlayer.stop();
             mediaPlayer.release();
             position = ((position - 1) < 0 ? (listSongs.size() - 1) : (position - 1));
+            CreateNotification.CreateNotification(PlayerActivity.this, listSongs.get(position), R.drawable.ic_pause_black_24dp,
+                    1, listSongs.size()-1);
             uri = Uri.parse(listSongs.get(position).getPath());
             mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
             metaData(uri);
@@ -211,6 +276,8 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
             mediaPlayer.stop();
             mediaPlayer.release();
             position = ((position - 1) < 0 ? (listSongs.size() - 1) : (position - 1));
+            CreateNotification.CreateNotification(PlayerActivity.this, listSongs.get(position), R.drawable.ic_pause_black_24dp,
+                    1, listSongs.size()-1);
             uri = Uri.parse(listSongs.get(position).getPath());
             mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
             metaData(uri);
@@ -253,6 +320,8 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
             mediaPlayer.stop();
             mediaPlayer.release();
             position = ((position + 1) > listSongs.size() - 1 ? (0) : (position + 1));
+            CreateNotification.CreateNotification(PlayerActivity.this, listSongs.get(position), R.drawable.ic_pause_black_24dp,
+                    1, listSongs.size()-1);
             uri = Uri.parse(listSongs.get(position).getPath());
             mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
             metaData(uri);
@@ -276,6 +345,8 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
             mediaPlayer.stop();
             mediaPlayer.release();
             position = ((position + 1) > listSongs.size() - 1 ? (0) : (position + 1));
+            CreateNotification.CreateNotification(PlayerActivity.this, listSongs.get(position), R.drawable.ic_pause_black_24dp,
+                    1, listSongs.size()-1);
             uri = Uri.parse(listSongs.get(position).getPath());
             mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
             metaData(uri);
@@ -317,6 +388,8 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
         if (mediaPlayer.isPlaying()) {
             playPauseBtn.setImageResource(R.drawable.ic_player_play_arrow);
             mediaPlayer.pause();
+            CreateNotification.CreateNotification(PlayerActivity.this, listSongs.get(position), R.drawable.ic_play_arrow_black_24dp,
+                    1, listSongs.size()-1);
             seekBar.setMax(mediaPlayer.getDuration() / 1000);
             PlayerActivity.this.runOnUiThread(new Runnable() {
                 @Override
@@ -331,6 +404,8 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
         } else {
             playPauseBtn.setImageResource(R.drawable.ic_player_pause);
             mediaPlayer.start();
+            CreateNotification.CreateNotification(PlayerActivity.this, listSongs.get(position), R.drawable.ic_pause_black_24dp,
+                    1, listSongs.size()-1);
             seekBar.setMax(mediaPlayer.getDuration() / 1000);
             PlayerActivity.this.runOnUiThread(new Runnable() {
                 @Override
@@ -540,4 +615,14 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
             mediaPlayer.setOnCompletionListener(this);
         }
     }
+
+    /*@Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            notificationManager.cancelAll();
+        }
+        unregisterReceiver(broadcastReceiver);
+    }*/
 }
