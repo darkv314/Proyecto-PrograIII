@@ -2,14 +2,19 @@ package com.example.appp3;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,66 +24,369 @@ import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
-import com.example.appp3.model.User;
-import com.example.appp3.utils.Constants;
-import com.google.gson.Gson;
 
+import com.bumptech.glide.Glide;
+import com.example.appp3.model.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
+import static com.example.appp3.AllSongsActivity.musicFiles;
+
 public class PlayerActivity extends AppCompatActivity {
-    public static String LOG = AllSongsActivity.class.getName();
-    private EditText passText;
-    private ImageButton enterVault;
-    private TextView songName;
-    private TextView songArtist;
+
+    TextView song_name, artist_name, duration_played, duration_total;
+    ImageView cover_art, nextBtn, prevBtn, shuffleBtn, repeatBtn;
+    SeekBar seekBar;
+    FloatingActionButton playPauseBtn;
+    static ArrayList<MusicFiles> listSongs = new ArrayList<>();
+    static Uri uri;
+    private Thread playThread, prevThread, nextThread;
+    static MediaPlayer mediaPlayer;
+    int position = -1;
     private Executor executor;
-    private Button loginButton;
     private BiometricPrompt biometricPrompt;
     private BiometricManager biometricManager;
     private BiometricPrompt.PromptInfo promptInfo;
     private RelativeLayout popupRelativeLayout;
-    private AllSongsTask song;
+    private Button loginButton;
+    private ImageButton enterVault;
+    private EditText passText;
     private User user;
-    private int enterVaultCont = 0;
     UserSQLiteHelper userSQLiteHelper;
+    private int enterVaultCont = 0;
 
-    private ImageButton play;
-    private ImageButton pause;
-    private int pauseTime;
-    private MediaPlayer mp;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
-        receiveValues();
         initViews();
+        receiveValues();
         addEvents();
+        song_name.setText(listSongs.get(position).getTitle());
+        artist_name.setText(listSongs.get(position).getArtist());
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (mediaPlayer != null && fromUser) {
+                    mediaPlayer.seekTo(progress * 1000);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        PlayerActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer != null) {
+                    int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                    seekBar.setProgress(mCurrentPosition);
+                    duration_played.setText(formattedTime(mCurrentPosition));
+                }
+                handler.postDelayed(this, 1000);
+            }
+        });
     }
 
-    private void receiveValues() {
-        Intent intent = getIntent();
-        if (intent.hasExtra(Constants.INTENT_SONG_NAME)) {
-            String songName = intent.getStringExtra(Constants.INTENT_SONG_NAME);
-            song = new Gson().fromJson(songName, AllSongsTask.class);
+    private void addEvents()
+    {
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validate()) {
+                    Intent change = new Intent(PlayerActivity.this, HiddenFilesActivity.class);
+                    passText.setText("");
+                    popupRelativeLayout.setVisibility(View.INVISIBLE);
+                    startActivity(change);
+                }
+            }
+        });
+        popupRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupRelativeLayout.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+        enterVault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterVaultCont++;
+                if (enterVaultCont == user.getNumber_of_times()) {
+                    enterVaultCont = 0;
+                    biometricPrompt.authenticate(promptInfo);
+                }
+            }
+        });
+    }
+
+    public boolean validate() {
+        String password = passText.getText().toString().trim();
+
+        //Handling validation for Password field
+        if (password.isEmpty()) {
+            passText.setError("Please enter valid password!");
+            return false;
+        } else if (password.length() < 4) {
+            passText.setError(getString(R.string.passTooShort));
+            return false;
+        }
+        if (user.getPassword().equals(password)) {
+            Toast.makeText(PlayerActivity.this, getString(R.string.logged), Toast.LENGTH_SHORT).show();
+            return true;
+        } else {
+            Toast.makeText(PlayerActivity.this, getString(R.string.loginFail), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        playThreadBtn();
+        nextThreadBtn();
+        prevThreadBtn();
+        super.onResume();
+    }
+
+    private void prevThreadBtn() {
+        prevThread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                prevBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        prevBtnClicked();
+                    }
+                });
+            }
+        };
+        prevThread.start();
+    }
+
+    private void prevBtnClicked() {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            position = ((position - 1) < 0 ? (listSongs.size() - 1) : (position - 1));
+            uri = Uri.parse(listSongs.get(position).getPath());
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+            metaData(uri);
+            song_name.setText(listSongs.get(position).getTitle());
+            artist_name.setText(listSongs.get(position).getArtist());
+            seekBar.setMax(mediaPlayer.getDuration() / 1000);
+            PlayerActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mediaPlayer != null) {
+                        int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                        seekBar.setProgress(mCurrentPosition);
+                    }
+                    handler.postDelayed(this, 1000);
+                }
+            });
+            playPauseBtn.setImageResource(R.drawable.ic_player_pause);
+            mediaPlayer.start();
+        } else {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            position = ((position - 1) < 0 ? (listSongs.size() - 1) : (position - 1));
+            uri = Uri.parse(listSongs.get(position).getPath());
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+            metaData(uri);
+            song_name.setText(listSongs.get(position).getTitle());
+            artist_name.setText(listSongs.get(position).getArtist());
+            seekBar.setMax(mediaPlayer.getDuration() / 1000);
+            PlayerActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mediaPlayer != null) {
+                        int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                        seekBar.setProgress(mCurrentPosition);
+                    }
+                    handler.postDelayed(this, 1000);
+                }
+            });
+            playPauseBtn.setImageResource(R.drawable.ic_player_play_arrow);
         }
     }
 
-    private void initViews() {
-        play = findViewById(R.id.playButton);
-        pause = findViewById(R.id.pauseButton);
+    private void nextThreadBtn() {
+        nextThread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                nextBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        nextBtnClicked();
+                    }
+                });
+            }
+        };
+        nextThread.start();
+    }
 
-        userSQLiteHelper = new UserSQLiteHelper(PlayerActivity.this);
-        setUser();
-        popupRelativeLayout = findViewById(R.id.popUp);
-        popupRelativeLayout.setVisibility(View.INVISIBLE);
+    private void nextBtnClicked() {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            position = ((position + 1) > listSongs.size() - 1 ? (0) : (position + 1));
+            uri = Uri.parse(listSongs.get(position).getPath());
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+            metaData(uri);
+            song_name.setText(listSongs.get(position).getTitle());
+            artist_name.setText(listSongs.get(position).getArtist());
+            seekBar.setMax(mediaPlayer.getDuration() / 1000);
+            PlayerActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mediaPlayer != null) {
+                        int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                        seekBar.setProgress(mCurrentPosition);
+                    }
+                    handler.postDelayed(this, 1000);
+                }
+            });
+            playPauseBtn.setImageResource(R.drawable.ic_player_pause);
+            mediaPlayer.start();
+        } else {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            position = ((position + 1) > listSongs.size() - 1 ? (0) : (position + 1));
+            uri = Uri.parse(listSongs.get(position).getPath());
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+            metaData(uri);
+            song_name.setText(listSongs.get(position).getTitle());
+            artist_name.setText(listSongs.get(position).getArtist());
+            seekBar.setMax(mediaPlayer.getDuration() / 1000);
+            PlayerActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mediaPlayer != null) {
+                        int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                        seekBar.setProgress(mCurrentPosition);
+                    }
+                    handler.postDelayed(this, 1000);
+                }
+            });
+            playPauseBtn.setImageResource(R.drawable.ic_player_play_arrow);
+        }
+    }
+
+    private void playThreadBtn() {
+        playThread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                playPauseBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        playPauseBtnClicked();
+                    }
+                });
+            }
+        };
+        playThread.start();
+    }
+
+    private void playPauseBtnClicked() {
+        if (mediaPlayer.isPlaying()) {
+            playPauseBtn.setImageResource(R.drawable.ic_player_play_arrow);
+            mediaPlayer.pause();
+            seekBar.setMax(mediaPlayer.getDuration() / 1000);
+            PlayerActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mediaPlayer != null) {
+                        int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                        seekBar.setProgress(mCurrentPosition);
+                    }
+                    handler.postDelayed(this, 1000);
+                }
+            });
+        } else {
+            playPauseBtn.setImageResource(R.drawable.ic_player_pause);
+            mediaPlayer.start();
+            seekBar.setMax(mediaPlayer.getDuration() / 1000);
+            PlayerActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mediaPlayer != null) {
+                        int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                        seekBar.setProgress(mCurrentPosition);
+                    }
+                    handler.postDelayed(this, 1000);
+                }
+            });
+        }
+    }
+
+    private String formattedTime(int mCurrentPosition) {
+        String totalOut = "";
+        String totalNew = "";
+        String seconds = String.valueOf(mCurrentPosition % 60);
+        String minutes = String.valueOf(mCurrentPosition / 60);
+        totalOut = minutes + ":" + seconds;
+        totalNew = minutes + ":" + "0" + seconds;
+        if (seconds.length() == 1) {
+            return totalNew;
+        } else {
+            return totalOut;
+        }
+    }
+
+    private void receiveValues() {
+        position = getIntent().getIntExtra("position", -1);
+        listSongs = musicFiles;
+        if (listSongs != null) {
+            playPauseBtn.setImageResource(R.drawable.ic_player_pause);
+            uri = Uri.parse(listSongs.get(position).getPath());
+        }
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+            mediaPlayer.start();
+        } else {
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+            mediaPlayer.start();
+        }
+        seekBar.setMax(mediaPlayer.getDuration() / 1000);
+        metaData(uri);
+    }
+
+    private void initViews() {
         passText = findViewById(R.id.passwordText);
         loginButton = findViewById(R.id.loginButton);
-        songArtist = findViewById(R.id.song_artist);
-        songName = findViewById(R.id.song_name);
-        songName.setText(song.getSong_name());
-        songArtist.setText(song.getSong_artist());
         enterVault = findViewById(R.id.music_note);
+        song_name = findViewById(R.id.song_name);
+        popupRelativeLayout = findViewById(R.id.popUp);
+        artist_name = findViewById(R.id.song_artist);
+        duration_played = findViewById(R.id.durationPlayed);
+        duration_total = findViewById(R.id.durationTotal);
+        cover_art = findViewById(R.id.song_image);
+        prevBtn = findViewById(R.id.previousSong);
+        nextBtn = findViewById(R.id.nextSong);
+        shuffleBtn = findViewById(R.id.shuffleButton);
+        repeatBtn = findViewById(R.id.repeatSong);
+        playPauseBtn = findViewById(R.id.play_pause);
+        seekBar = findViewById(R.id.seekBar);
+        userSQLiteHelper = new UserSQLiteHelper(PlayerActivity.this);
+        setUser();
         biometricManager = BiometricManager.from(this);
         switch (biometricManager.canAuthenticate()) {
             case BiometricManager.BIOMETRIC_SUCCESS:
@@ -136,129 +444,37 @@ public class PlayerActivity extends AppCompatActivity {
                 .setSubtitle("Log in using your biometric credential")
                 .setNegativeButtonText("Use account password")
                 .build();
+    }
 
+    private void metaData(Uri uri) {
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(uri.toString());
+        int durationTotal = Integer.parseInt(listSongs.get(position).getDuration()) / 1000;
+        duration_total.setText(formattedTime(durationTotal));
+        byte[] art = retriever.getEmbeddedPicture();
+        if (art != null) {
+            Glide.with(this)
+                    .asBitmap()
+                    .load(art)
+                    .into(cover_art);
+        } else {
+            Glide.with(this)
+                    .asBitmap()
+                    .load(R.drawable.owo)
+                    .into(cover_art);
+        }
     }
 
     void setUser() {
         Cursor cursor = userSQLiteHelper.readUser();
         if (cursor.getCount() == -1) {
-            Log.e(LOG, "This is working)?");
+            Log.e("Lol", "This is working)?");
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         } else {
-            Log.e(LOG, "This is not working)?");
+            Log.e("Lol", "This is not working)?");
             while (cursor.moveToNext()) {
                 user = new User(cursor.getString(0),cursor.getString(1), Integer.parseInt(cursor.getString(2)));
             }
         }
-    }
-
-    private void addEvents() {
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validate()) {
-                    Intent change = new Intent(PlayerActivity.this, HiddenFilesActivity.class);
-                    passText.setText("");
-                    popupRelativeLayout.setVisibility(View.INVISIBLE);
-                    startActivity(change);
-                }
-            }
-        });
-        popupRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupRelativeLayout.setVisibility(View.INVISIBLE);
-
-            }
-        });
-
-        enterVault.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                enterVaultCont++;
-                if (enterVaultCont == user.getNumber_of_times()) {
-                    enterVaultCont = 0;
-                    biometricPrompt.authenticate(promptInfo);
-                }
-            }
-        });
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mp == null){
-                    mp = MediaPlayer.create(PlayerActivity.this, R.raw.cant_stop);
-                    mp.start();
-                }else if(!mp.isPlaying()){
-                    mp.seekTo(pauseTime);
-                    mp.start();
-                }
-            }
-        });
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mp != null){
-                    mp.pause();
-                    pauseTime = mp.getCurrentPosition();
-                }
-            }
-        });
-    }
-
-    public boolean validate() {
-        String password = passText.getText().toString().trim();
-
-        //Handling validation for Password field
-        if (password.isEmpty()) {
-            passText.setError("Please enter valid password!");
-            return false;
-        } else if (password.length() < 4) {
-            passText.setError(getString(R.string.passTooShort));
-            return false;
-        }
-        if (user.getPassword().equals(password)) {
-            Toast.makeText(PlayerActivity.this, getString(R.string.logged), Toast.LENGTH_SHORT).show();
-            return true;
-        } else {
-            Toast.makeText(PlayerActivity.this, getString(R.string.loginFail), Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(LOG, "onStart1");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(LOG, "onResume1");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(LOG, "onPause1");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(LOG, "onStop1");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(LOG, "onRestart1");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(LOG, "onDestroy1");
     }
 }

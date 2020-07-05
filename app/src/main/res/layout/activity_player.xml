@@ -65,30 +65,44 @@
 
             </TextView>
 
-
-
-            <androidx.appcompat.widget.AppCompatSeekBar
-                android:id="@+id/song_progress"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_below="@+id/song_artist"
-                android:layout_gravity="center_vertical"
-                android:padding="25dp" />
+                android:layout_marginBottom="15dp"
+                android:id="@+id/relative_layout_seekbar">
 
-            <ImageButton
-                android:id="@+id/playButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:paddingLeft="15dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginBottom="20dp"
-                android:layout_centerHorizontal="true"
-                android:paddingRight="15dp"
-                app:srcCompat="@drawable/ic_player_play_arrow">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1:28"
+                    android:id="@+id/durationPlayed"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginStart="10dp"
 
-            </ImageButton>
+                    android:layout_alignParentStart="true"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1:28"
+                    android:id="@+id/durationTotal"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="10dp"
+
+                    android:layout_alignParentEnd="true"/>
+                
+                <SeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seekBar"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentBottom="true"/>
+
+            </RelativeLayout>
+
+            
             <LinearLayout
                 android:id="@+id/song_buttons"
                 android:layout_width="match_parent"
@@ -97,32 +111,35 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <ImageButton
+                <ImageView
+                    android:id="@+id/previousSong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:layout_marginEnd="50dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="5dp"
                     app:srcCompat="@drawable/ic_player_skip_previous" />
 
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/play_pause"
+                    android:src="@drawable/ic_player_play_arrow"
+
+                    app:backgroundTint="#6FFFFFFF"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginStart="10dp"/>
 
 
-                <ImageButton
-                    android:id="@+id/pauseButton"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@null"
-                    android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/ic_player_pause" />
-
-                <ImageButton
+                <ImageView
+                    android:id="@+id/nextSong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:layout_marginStart="50dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="5dp"
                     app:srcCompat="@drawable/ic_player_skip_next" />
             </LinearLayout>
 
@@ -135,16 +152,17 @@
                 android:layout_marginTop="30dp"
                 android:paddingRight="20dp">
 
-                <ImageButton
+                <ImageView
+                    android:id="@+id/repeatSong"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:background="@null"
                     app:srcCompat="@drawable/ic_player_repeat">
 
-                </ImageButton>
+                </ImageView>
 
-                <ImageButton
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
@@ -154,22 +172,24 @@
 
                     app:srcCompat="@drawable/ic_player_upward_arrow">
 
-                </ImageButton>
+                </ImageView>
 
-                <ImageButton
+                <ImageView
+                    android:id="@+id/shuffleButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:background="@null"
                     app:srcCompat="@drawable/ic_player_shuffle">
 
-                </ImageButton>
+                </ImageView>
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/popUp"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/semi_transparent">

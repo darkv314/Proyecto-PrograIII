@@ -1,6 +1,7 @@
 package com.example.appp3.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appp3.MusicFiles;
+import com.example.appp3.PlayerActivity;
 import com.example.appp3.R;
 
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyVieHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyVieHolder holder, final int position) {
         holder.file_name.setText(mFiles.get(position).getTitle());
         byte[] image = getAlbumArt(mFiles.get(position).getPath());
         if (image!=null)
@@ -52,6 +54,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder>
                     .load(R.drawable.owo)
                     .into(holder.album_art);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PlayerActivity.class);
+                intent.putExtra("position", position);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

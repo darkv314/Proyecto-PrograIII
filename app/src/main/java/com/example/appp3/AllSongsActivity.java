@@ -49,9 +49,11 @@ public class AllSongsActivity extends AppCompatActivity {
     }
     private void permission()
     {
+        Log.e("???", "WHYYYY");
         if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED)
         {
+            //Toast.makeText(this, "????", Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(AllSongsActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_CODE);
         }
@@ -149,7 +151,7 @@ public class AllSongsActivity extends AppCompatActivity {
                 String artist = cursor.getString(4);
 
                 MusicFiles musicFiles = new MusicFiles(path, title, artist, album, duration);
-                Log.e("Path : " + path,"Album : " + album);
+                //Log.e("Path : " + path,"Album : " + album);
                 tempAudioList.add(musicFiles);
             }
             cursor.close();
