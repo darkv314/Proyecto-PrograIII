@@ -8,17 +8,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.appp3.model.FileModel;
+import com.example.appp3.model.FoldersModel;
 import com.example.appp3.R;
+import com.example.appp3.model.FoldersModel;
 
 import java.util.List;
 
 public class ListFilesAdapter  extends BaseAdapter {
 
     private Context context;
-    private List<FileModel> items;
+    private List<FoldersModel> items;
 
-    public ListFilesAdapter(Context context, List<FileModel> items) {
+    public ListFilesAdapter(Context context, List<FoldersModel> items) {
         this.context = context;
         this.items = items;
     }
@@ -29,7 +30,7 @@ public class ListFilesAdapter  extends BaseAdapter {
     }
 
     @Override
-    public FileModel getItem(int position) {
+    public FoldersModel getItem(int position) {
         return this.items.get(position);
     }
 
@@ -57,7 +58,7 @@ public class ListFilesAdapter  extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        FileModel task = this.items.get(position);
+        FoldersModel task = this.items.get(position);
         viewHolder.nameTextView.setText(task.getName());
         viewHolder.iconImageView.setImageResource(task.getImage());
         return view;
@@ -66,5 +67,10 @@ public class ListFilesAdapter  extends BaseAdapter {
     static class ViewHolder {
         TextView nameTextView;
         ImageView iconImageView;
+    }
+
+    public void setItems(List<FoldersModel> items)
+    {
+        this.items = items;
     }
 }

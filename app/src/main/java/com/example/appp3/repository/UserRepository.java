@@ -1,36 +1,33 @@
 package com.example.appp3.repository;
 
-import com.example.appp3.model.User;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
-import java.util.ArrayList;
-import java.util.List;
+public class  UserRepository {
 
+    private Context context;
+    private SharedPreferences preferences;
 
-public class UserRepository {
-    private static UserRepository instance;
-    private List<User> users = new ArrayList<>();
-
-    public static UserRepository getInstance() {
-        if (instance == null) {
-            instance = new UserRepository();
-        }
-        return instance;
+    //llenar campo
+    public void setNumberOfTimes(int numberOfTimes) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("CLICKS", numberOfTimes);
+        editor.apply();
+    }
+    //si no llenado == 0 mostramos pantalla
+    //para los click pantalla del reproductor
+    public int getNumberOfTimes() {
+        return preferences.getInt("CLICKS", 10);
     }
 
-    private UserRepository() {
+    public void clearNumberOfTimes() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("CLICKS");
+        editor.apply();
     }
-
-    public boolean login(int numero) {
-        for (User user : users) {
-            if (Integer.parseInt(user.getNumber_of_times()) == numero) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void register(User user) {
-        users.add(user);
+    public UserRepository(Context context) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
 }

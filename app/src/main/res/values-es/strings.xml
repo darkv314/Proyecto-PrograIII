@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppP3</string>
+    <string name="app_name">HiSky</string>
     <string name="song_Name">Snow(Hey Oh)</string>
     <string name="song_Artist">Red Hot Chilli Peppers</string>
     <string name="edit">Editar</string>
@@ -19,7 +19,7 @@
     <string name="registerSuccess">Usuario creado con exito!  Disfruta ;)</string>
     <string name="logged">Ingresaste corectamente uwu</string>
     <string name="loginFail">Contraseña incorrecta :(</string>
-    <string name="change">Cambiar</string>
+    <string name="change">VISTA</string>
     <string name="files">Archivos</string>
     <string name="images">Imagenes</string>
     <string name="newFile">Archivo Nuevo</string>
@@ -27,5 +27,32 @@
     <string name="add">Añadir</string>
     <string name="open">abrir</string>
     <string name="close">cerrar</string>
-    <string name="settings">Ajustes</string>
+    <string name="settings">AJUSTES</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="welcomeMessage">Como primer paso a tu experiencia HiSky porfavor llena los siguinetes campos.</string>
+    <string name="deleteButton">Eliminar archivo</string>
+    <string name="nameFile">Nombre del Archivo</string>
+    <string name="pathFile">Ruta</string>
+    <string name="send">Crear</string>
+    <string name="clean">Limpiar</string>
+    <string name="settings_head">Ajustes</string>
+    <string name="app_name_full">HiSky</string>
+    <string name="authors">Autores</string>
+    <string name="info">Información</string>
+    <string name="ver">Versión</string>
+    <string name="dunno">Spice Girls</string>
+    <string name="support">Soporte</string>
+    <string name="telegram">Telegram</string>
+    <string name="wapp">Whats App</string>
+    <string name="donate">  Ayudanos</string>
+    <string name="about_also">Si tiene algún problema, no dude en CONTACTARNOS. Y si te gustó esta aplicación, AYÚDANOS.</string>
+    <string name="darkv314">Ricardo Tejerina</string>
+    <string name="mik43la">Mikaela Cárdenas</string>
+    <string name="laBalaElmo">Juan Rodrigo Tordoya</string>
+    <string name="aleS900">Santiago Vargas</string>
+    <string name="deseg_gd">Encargado Del Diseño ;)</string>
+    <string name="abou_us">Conócenos</string>
+    <string name="size">Tamaño</string>
+    <string name="datec">Fecha de creación</string>
+    <string name="langaugess">Lenguaje</string>
 </resources>

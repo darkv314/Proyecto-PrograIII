@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -123,7 +124,7 @@ public class AllSongsActivity extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent fistrMenu = new Intent(AllSongsActivity.this, FistrMenu.class);
+                Intent fistrMenu = new Intent(AllSongsActivity.this, FirstMenu.class);
                 startActivity(fistrMenu);
             }
         });
@@ -147,7 +148,77 @@ public class AllSongsActivity extends AppCompatActivity {
                 "Red Hot Chilli Pepper"));
         items.add(new AllSongsTask(items.size(), "Toxicity",
                 "System Of A Dawn"));
-        items.add(new AllSongsTask(items.size(), "High Hopes ",
+        items.add(new AllSongsTask(items.size(), "High Hopes",
                 "Panic! At The Disco"));
+        items.add(new AllSongsTask(items.size(), "All That She Wants",
+                "Ace of Base"));
+        items.add(new AllSongsTask(items.size(), "Your Woman",
+                "White Town"));
+        items.add(new AllSongsTask(items.size(), "Fantasy",
+                "Mariah Carey"));
+        items.add(new AllSongsTask(items.size(), "Undone-The Sweater Song",
+                "Weezer"));
+        items.add(new AllSongsTask(items.size(), "Cannonball",
+                "The Breeders"));
+        items.add(new AllSongsTask(items.size(), "Killing My Softly",
+                "The Fugges"));
+        items.add(new AllSongsTask(items.size(), "Loaded",
+                "Primal Screen"));
+        items.add(new AllSongsTask(items.size(), "...Baby One MOre Time",
+                "Britney Spears"));
+        items.add(new AllSongsTask(items.size(), "Torn",
+                "Natalie Imbruglia"));
+        items.add(new AllSongsTask(items.size(), "On a Ragga Tip",
+                "SL2"));
+        items.add(new AllSongsTask(items.size(), "Say You'll Be There",
+                "Spice Girls"));
+        items.add(new AllSongsTask(items.size(), "You Don't Know Me",
+                "Armand Van Helden"));
+        items.add(new AllSongsTask(items.size(), "Ray of Light",
+                "Madonna"));
+        items.add(new AllSongsTask(items.size(), "Pony",
+                "Guinuwine"));
+        items.add(new AllSongsTask(items.size(), "1979",
+                "Smashing Pumpkings"));
+        items.add(new AllSongsTask(items.size(), "You Oughta Know",
+                "Alanis Morisette"));
+        items.add(new AllSongsTask(items.size(), "Animale Nitrade",
+                "Suede"));
+        items.add(new AllSongsTask(items.size(), "Step On",
+                "Happy Mondays"));
+        items.add(new AllSongsTask(items.size(), "Windowlicker",
+                "Aphex Twin"));
+        items.add(new AllSongsTask(items.size(), "Rebel Girl",
+                "Bikini Kill"));
+        items.add(new AllSongsTask(items.size(), "Doo Wop(That Thing)",
+                "Lauryn Hill"));
+        items.add(new AllSongsTask(items.size(), "Enter Sandman",
+                "Metallica"));
+        items.add(new AllSongsTask(items.size(), "Connection",
+                "Elastica"));
+        items.add(new AllSongsTask(items.size(), "Juicy",
+                "The Notorious Big"));
+        items.add(new AllSongsTask(items.size(), "Poison",
+                "The Prodigy"));
+        items.add(new AllSongsTask(items.size(), "Inner City",
+                "Goldie"));
+        items.add(new AllSongsTask(items.size(), "Bittersweet Symphony",
+                "The Verve"));
+        items.add(new AllSongsTask(items.size(), "Killing in the Name",
+                "Rage Against The Machine"));
+        items.add(new AllSongsTask(items.size(), "Sure Shot",
+                "Beastie Boys"));
+        items.add(new AllSongsTask(items.size(), "Nothing Compare 2 U'",
+                "Sinnnead O'Connor"));
+        items.add(new AllSongsTask(items.size(), "Born Slippy.Nuxx",
+                "Underworld"));
+        items.add(new AllSongsTask(items.size(), "Loser",
+                "Beck"));
+        items.add(new AllSongsTask(items.size(), "Deceptacon",
+                "La Tigre"));
+        items.add(new AllSongsTask(items.size(), "Paranoid Android",
+                "Radiohead"));
+
+
     }
 }

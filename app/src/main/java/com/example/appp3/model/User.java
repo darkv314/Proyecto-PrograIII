@@ -3,10 +3,10 @@ package com.example.appp3.model;
 public class User
 {
     private String id;
-    private String number_of_times;
+    private int number_of_times;
     private String password;
 
-    public User(String id, String number_of_times, String password)
+    public User(String id, String password, int number_of_times)
     {
         this.id = id;
         this.number_of_times = number_of_times;
@@ -21,11 +21,11 @@ public class User
         this.id = id;
     }
 
-    public String getNumber_of_times() {
+    public int getNumber_of_times() {
         return number_of_times;
     }
 
-    public void setNumber_of_times(String number_of_times) {
+    public void setNumber_of_times(int number_of_times) {
         this.number_of_times = number_of_times;
     }
 

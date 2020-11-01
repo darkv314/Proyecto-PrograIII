@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBlack"
+    android:background="@color/navigate2"
     android:elevation="2dp"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
@@ -13,7 +13,8 @@
         android:layout_marginTop="10dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/nfc_w"/>
+        android:src="@drawable/nfc_w"
+        android:layout_marginEnd="10dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -21,8 +22,9 @@
         android:layout_marginTop="10dp"
         android:gravity="start"
         android:text="Configuración"
+        android:paddingTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/colorGrey"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:textStyle="bold" />
 
